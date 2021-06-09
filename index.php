@@ -1,5 +1,5 @@
 <?php
-    $dbconn = mysqli_connect("localhost", "root", "password1", "lostark");
+    include "../config/loa_config.php";
 ?>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
