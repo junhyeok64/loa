@@ -41,10 +41,15 @@
         @media screen and (max-width:900px) {
             .h-remove-bottom {width:100%;}
             .btn--about{width:100%;}
+            .collect_menu li {width:95%}
 
         }
         #user_info {padding-top:30px;}
         .island_zone {font-size:15px; padding:0px 30px;}
+        .island_icon {background: url(/images/sprite.png) no-repeat 0 0;background-size: 1337px 1302px;}
+        .island_icon {width: 23px;height: 22px;background-position: -1271px -1052px;}
+        .collect_menu li { list-style-type:none;float:left;border: 2px solid white;padding: 0rem 9rem;background-color:#3b0d11;color:white;}
+        #property h4 {color:white;}
     </style>
 
 </head>
@@ -141,7 +146,7 @@
 
     <!-- about
     ================================================== -->
-    <section id="about" class="s-about" style="position:fixed;width:500rem;z-index:999">
+    <section id="about" class="s-about" style="position:fixed;width:100rem;z-index:999">
         <div class="row row-y-center about-content">
             <div class="column large-half medium-full">
                 <ul class="about-sched">
@@ -179,14 +184,14 @@
     ================================================== -->
     <section class="s-series">
 
-        <div class="series-img" style="background-image: url('images/character/img_index_v4.jpg');background-position:85%;"></div>
+        <div class="series-img" id="user_info" style="background-image: url('images/character/img_index_v2.jpg');background-position:85%;"></div>
 
         <div class="row row-y-center series-content">
 
             <div class="column large-half medium-full">
-                <h3 class="subhead">Current Series</h3>
-                <h2>Shape Your Life with the Words of Life.</h2>
-                <p>
+                <h3 class="subhead" id="server">Current Series</h3>
+                <h2 id="nickname">Shape Your Life with the Words of Life.</h2>
+                <p id="property">
                 Aut sed amet et quis aliquid laborum minus consequatur. Animi repellendus quas. 
                 Est voluptates minima ut dolorum aliquid sint. Ratione et et molestias rerum 
                 quibusdam. Deserunt suscipit ut expedita. Non numquam aut eum perferendis 
@@ -218,7 +223,7 @@
 
     </section> <!-- end s-series -->
 
-    <section class="s-events" id="user_info">
+    <section class="s-events" id="">
         <div id="user_info_sub"></div>
 
         <!--<div class="row events-header">
@@ -227,19 +232,29 @@
             </div>
         </div> <!-- end event-header -->
         <div style="padding-top:15rem;"></div>
+        <center>
+        <div>
+            <ul class="collect_menu">
+                <li>섬의 마음</li>
+                <li>오르페우스의 별</li>
+                <li>위대한 미술품</li>
+                <li>거인의 심장</li>
+                <li>항해 모험물</li>
+            </ul>
+        </div>
+        </center>
 
-        <div class="row block-large-1-2 block-900-full events-list">
+        <div class="row block-large-1-2 block-900-full events-list" style="clear:both">
 
             <div class="column events-list__item">
                 <h3 class="display-1 events-list__item-title">
                     <a href="#0" title="">섬의 마음</a>
                 </h3>
                 <ul class="events-list__meta">
-                    <li class="">Total : <div class="island_total"></div></li>
-                    <li class="">Collect : <div class="island_collect"></div></li>
+                    <li class="">섬의마음 획득 현황 : <b class="island_collect"></b></li>
                 </ul>
                 <?php
-                    $island_qry = "select * from `gather` where 1=1 ";
+                    $island_qry = "select * from `gather` where 1=1 and state = 'Y' ";
                     $island_res = mysqli_query($dbconn, $island_qry);
                     $island_view = "";
                     $island_preview = "";

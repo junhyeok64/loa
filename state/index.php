@@ -25,11 +25,35 @@
 			preg_match_all($patten,$result,$job); 
 
 			$job_img = $job[1][0];
+			$job = $background_img = "";
+
 			switch($job_img) {
 				case "https://cdn-lostark.game.onstove.com/2018/obt/assets/images/common/thumb/emblem_gunslinger.png":
 					$job = "건슬링어";
+					$background_img = "images/character/img_index_v4.jpg";
+				break;
+				case "https://cdn-lostark.game.onstove.com/2018/obt/assets/images/common/thumb/emblem_striker.png":
+					$job = "스트라이커";
+					$background_img = "images/character/img_index_v5.jpg";
+				break;
+				default:
+					$background_img = "images/character/img_index_v2.jpg";
 				break;
 			}
+			//특성
+			//profile-ability-basic
+			$patten = "/<div class=\"profile-ability-basic\">(.*?)<\/div>/is";
+			preg_match_all($patten,$result,$property); 
+			$property = addslashes($property[1][0]);
+			$property = str_replace("\n", "", $property);
+			$property = str_replace("\r", "", $property);
+
+			//echo substr($result, "<div class=\"profile-ability-basic\">", "</div>");
+
+
+			$patten = "/(.*?)</div>/is";
+			preg_match_all($patten,$result,$memberno); 
+			//profile-ability-battle
 
 
 			$patten = "/var _memberNo = \'(.*?)\'/is";
@@ -72,12 +96,28 @@
 			//섬의 마음
 			$pasing_arr = explode("<span class=\"now-count\">", $result);
 			$pasing_arr = explode("</span>", $pasing_arr[1]);
+			$island_collect = $pasing_arr[0];
+
+			//max-count
+			$pasing_arr = explode("<span class=\"max-count\">", $result);
+			$pasing_arr = explode("</span>", $pasing_arr[1]);
 			$island_total = $pasing_arr[0];
 
 			$is_collection = explode("<ul class=\"list\">", $result);
 			$is_collection = explode("</ul>", $is_collection[1]);
 
-			$out = "";
+			$out .= "<script type=\"text/javascript\">";
+			$out .= "$('#nickname').html('".$nickname."');";
+			$out .= "$('.island_collect').html('".$island_collect." / ".$island_total."');";
+			$out .= "$('.island_total').html('".$island_total."');";
+			if($background_img != "") {
+				$out .= "$('.series-img').css(\"background-image\", \"url('".$background_img."')\");";
+			}
+			$out .= "$('#property').html(\"".$property."\");";
+			$out .= "</script>";
+
+
+			/*$out = "";
 			$out .= "<div class=\"row events-header\">";
         	$out .= "<div class=\"column\">";
         	$out .= "<h2 class=\"subhead\">Island Mind.</h2>";
@@ -90,7 +130,7 @@
 			$out .= $is_collection[0];
 			$out .= "</p>";
 			$out .= "</div>";
-			$out .= "</div>";
+			$out .= "</div>";*/
 
 			echo $out;
 
