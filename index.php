@@ -219,6 +219,7 @@
     </section> <!-- end s-series -->
 
     <section class="s-events" id="user_info">
+        <div id="user_info_sub"></div>
 
         <!--<div class="row events-header">
             <div class="column">
