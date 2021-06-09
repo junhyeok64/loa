@@ -37,7 +37,7 @@
 					$background_img = "images/character/img_index_v5.jpg";
 				break;
 				default:
-					$background_img = "images/character/img_index_v2.jpg";
+					$background_img = "images/character/img_index_.vjpg";
 				break;
 			}
 			//특성
@@ -51,8 +51,8 @@
 			//echo substr($result, "<div class=\"profile-ability-basic\">", "</div>");
 
 
-			$patten = "/(.*?)</div>/is";
-			preg_match_all($patten,$result,$memberno); 
+			/*$patten = "/<div class=\"profile-ability-basic\">(.*?)<\/div>/is";
+			preg_match_all($patten,$result,$memberno); */
 			//profile-ability-battle
 
 
