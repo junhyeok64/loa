@@ -36,17 +36,40 @@
 					$job = "스트라이커";
 					$background_img = "images/character/img_index_v5.jpg";
 				break;
+				case "https://cdn-lostark.game.onstove.com/2018/obt/assets/images/common/thumb/emblem_bard.png":
+					$job = "바드";
+					$background_img = "images/character/bard.jpg";
+				break;
 				default:
-					$background_img = "images/character/img_index_.vjpg";
+					$background_img = "images/character/img_index_v2.jpg";
 				break;
 			}
+			//profile-character-info__server
+			$server = "";
+			$patten = "/<span class=\"profile-character-info__server\" title=\"(.*?)\">/is";
+			preg_match_all($patten,$result,$server); 
+			$server = str_replace("@", "", $server[1][0]);
 			//특성
 			//profile-ability-basic
-			$patten = "/<div class=\"profile-ability-basic\">(.*?)<\/div>/is";
+			$patten = "/<div class=\"profile-ability-basic\">(.*?)<div class=\"profile-ability-battle\">/is";
 			preg_match_all($patten,$result,$property); 
 			$property = addslashes($property[1][0]);
 			$property = str_replace("\n", "", $property);
 			$property = str_replace("\r", "", $property);
+			$property = str_replace("\r", "", $property);
+			//$property = str_replace("<li>        <span>공격력", "<li class=\"property_li\"><span>공격력", $property);
+			$property = "<div>".$property;
+
+			$ability = "";
+
+			$patten = "/<div class=\"profile-ability-battle\">(.*?)<div class=\"profile-ability-engrave\">/is";
+			preg_match_all($patten,$result,$ability); 
+			$ability = addslashes($ability[1][0]);
+			$ability = str_replace("\n", "", $ability);
+			$ability = str_replace("\r", "", $ability);
+			$ability = "<div>".$ability;
+
+			//profile-ability-battle
 
 			//echo substr($result, "<div class=\"profile-ability-basic\">", "</div>");
 
@@ -107,14 +130,18 @@
 			$is_collection = explode("</ul>", $is_collection[1]);
 
 			$out .= "<script type=\"text/javascript\">";
+			$nickname = !empty($job_img) ? "<img src=\"".$job_img."\" >".$nickname : $nickname;
 			$out .= "$('#nickname').html('".$nickname."');";
 			$out .= "$('.island_collect').html('".$island_collect." / ".$island_total."');";
 			$out .= "$('.island_total').html('".$island_total."');";
 			if($background_img != "") {
 				$out .= "$('.series-img').css(\"background-image\", \"url('".$background_img."')\");";
 			}
-			$out .= "$('#property').html(\"".$property."\");";
+			$out .= "$('#property').html(\"".$property.$ability."\");";
+			$out .= "$('#server').html('".$server."')";
 			$out .= "</script>";
+			//$out .= "<script type='text/javascript'>$(document).ready(function (){ $('#property > div').hover(function (){ $('.profile-ability-tooltip ul').show();}, function() { $('.profile-ability-tooltip ul').hide();});})</script>";
+			$out .= "<script type='text/javascript'>$(document).ready(function (){ $('#property > div').hover(function (){ $(this).children().show(); }, function() { $(this).children('div').hide(); });})</script>";
 
 
 			/*$out = "";

@@ -31,6 +31,14 @@
     <link rel="icon" type="image/png" sizes="16x16" href="images/GameIcon.ico">
     <link rel="manifest" href="site.webmanifest">
     <style type="text/css">
+        
+        #user_info {padding-top:30px;}
+        .island_zone {font-size:15px; padding:0px 30px;}
+        .island_icon {background: url(/images/sprite.png) no-repeat 0 0;background-size: 1337px 1302px;}
+        .island_icon {width: 23px;height: 22px;background-position: -1271px -1052px;}
+        #property h4 {color:white;}
+        .collect_menu li { list-style-type:none;float:left;border: 2px solid white;padding: 0rem 9rem;background-color:#3b0d11;color:white;width:25%;height:7rem;line-height:6.5rem;}
+        .profile-ability-tooltip ul{display:none;position:absolute;background-color:white;}
         @font-face {
             font-family:'Maplestory';
             /*src: url('./font/Maplestory Bold.ttf') format('truetype');*/
@@ -44,12 +52,6 @@
             .collect_menu li {width:95%}
 
         }
-        #user_info {padding-top:30px;}
-        .island_zone {font-size:15px; padding:0px 30px;}
-        .island_icon {background: url(/images/sprite.png) no-repeat 0 0;background-size: 1337px 1302px;}
-        .island_icon {width: 23px;height: 22px;background-position: -1271px -1052px;}
-        .collect_menu li { list-style-type:none;float:left;border: 2px solid white;padding: 0rem 9rem;background-color:#3b0d11;color:white;}
-        #property h4 {color:white;}
     </style>
 
 </head>
@@ -233,16 +235,20 @@
         </div> <!-- end event-header -->
         <div style="padding-top:15rem;"></div>
         <center>
-        <div>
+        <div class="row">
             <ul class="collect_menu">
                 <li>섬의 마음</li>
                 <li>오르페우스의 별</li>
                 <li>위대한 미술품</li>
                 <li>거인의 심장</li>
                 <li>항해 모험물</li>
+                <li>모코코 씨앗</li>
+                <li>이그네아의 증표</li>
+                <li>세계수의 잎</li>
             </ul>
         </div>
         </center>
+        <div style="padding-top:15rem;"></div>
 
         <div class="row block-large-1-2 block-900-full events-list" style="clear:both">
 
@@ -459,5 +465,16 @@
     <script src="js/plugins.js"></script>
     <script src="js/main.js"></script>
     <script src="js/total.js"></script>
+
+    <script type="text/javascript">
+        /*$(document).ready(function (){
+            $("#property > div").hover(function (){
+                //alert("aa");
+                $(".profile-ability-tooltip ul").show();
+            }, function() {
+                $(".profile-ability-tooltip ul").hide();
+            });
+        })*/
+    </script>
 
 </body>
