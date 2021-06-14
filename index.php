@@ -204,6 +204,8 @@
 
             <div class="column large-half medium-full">
                 <div class="series-content__buttons">
+                    <div id="character_img"></div>
+                    <div id="item_img"></div>
                     <a href="" class="btn btn--large h-full-width">Watch the Video</a>
                     <a href="" class="btn btn--large h-full-width">Listen To the Message</a>
                 </div>
@@ -226,7 +228,7 @@
 
     </section> <!-- end s-series -->
 
-    <section class="s-events" id="">
+    <section class="s-events" id="collect_section">
         <div id="user_info_sub"></div>
 
         <!--<div class="row events-header">

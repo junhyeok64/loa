@@ -25,12 +25,13 @@
 			preg_match_all($patten,$result,$job); 
 
 			$job_img = $job[1][0];
-			$job = $background_img = "";
+			$job = $background_img = $character_img = "";
 
 			switch($job_img) {
 				case "https://cdn-lostark.game.onstove.com/2018/obt/assets/images/common/thumb/emblem_gunslinger.png":
 					$job = "건슬링어";
 					$background_img = "images/character/img_index_v4.jpg";
+					$character_img = "<img src=\"images/character_img/gunslinger.png\">";
 				break;
 				case "https://cdn-lostark.game.onstove.com/2018/obt/assets/images/common/thumb/emblem_striker.png":
 					$job = "스트라이커";
@@ -68,6 +69,52 @@
 			$ability = str_replace("\n", "", $ability);
 			$ability = str_replace("\r", "", $ability);
 			$ability = "<div>".$ability;
+
+			//item_grade
+			$pattem = "/<div class=\"slot1\" data-grade=\"(.*?)\"/is";
+			preg_match_all($pattem,$result,$item_grade);
+			$item_grade = $item_grade[1][0];
+
+			//item_code
+			$pattem = "/<div class=\"slot1\" data-grade=\"".$item_grade."\" data-item=\"(.*?)_001\">/is";
+			preg_match_all($pattem,$result,$item_code);
+			$item_code = $item_code[1][0];
+
+			//item_img
+			/*
+			<div class="slot1" data-grade="4" data-item="E7b75319_001"><img src="https://cdn-lostark.game.onstove.com/EFUI_IconAtlas/FBM_M_Item/FBM_M_Item_16.png" alt=""></div>
+			*/
+			$item_img = array();
+			for($i=1; $i<=12; $i++) {
+				$data_grade = 4;
+				switch($i) {
+					case "2":
+						$patten_item = "05";
+					break;
+					case "6":
+						$patten_item = "00";
+					break;
+					case "1":
+						$patten_item = ($i<10) ? "0".$i : $i;
+					break;
+					default:
+						$patten_item = (($i-1)<10) ? "0".($i-1) : ($i-1);
+					break;
+				}
+				if($i == 12) {
+					$data_grade = 3;
+				}
+				$patten = "/<div class=\"slot".$i."\" data-grade=\"(.*?)\"/is";
+				preg_match_all($patten,$result,$item_greade);
+				$item_greade = $item_greade[1][0];
+
+
+				$patten_item = $item_code."_0".$patten_item;
+				$patten = "/<div class=\"slot".$i."\" data-grade=\"".$item_greade."\" data-item=\"".$patten_item."\"><img src=\"(.*?)\" alt=\"\"><\/div>/is";
+				preg_match_all($patten,$result,$item_arr);
+				$item_img[$i] = $item_arr[1][0];
+			}
+
 
 			//profile-ability-battle
 
@@ -138,7 +185,15 @@
 				$out .= "$('.series-img').css(\"background-image\", \"url('".$background_img."')\");";
 			}
 			$out .= "$('#property').html(\"".$property.$ability."\");";
-			$out .= "$('#server').html('".$server."')";
+			$out .= "$('#server').html('".$server."');";
+			$out .= "$('#character_img').html('".$character_img."');";
+
+			$item_out = "";
+			for($i=1; $i<count(($item_img))+1; $i++) {
+				$item_out .= "<img src=\"".$item_img[$i]."\">";
+			}
+			$out .= "$('#item_img').html('".$item_out."');";
+
 			$out .= "</script>";
 			//$out .= "<script type='text/javascript'>$(document).ready(function (){ $('#property > div').hover(function (){ $('.profile-ability-tooltip ul').show();}, function() { $('.profile-ability-tooltip ul').hide();});})</script>";
 			$out .= "<script type='text/javascript'>$(document).ready(function (){ $('#property > div').hover(function (){ $(this).children().show(); }, function() { $(this).children('div').hide(); });})</script>";
@@ -163,7 +218,7 @@
 
 
 			//<span class="max-count">94
-			echo $island_mind;
+			//echo $island_mind;
 			/*echo "<xmp>";
 			print_r($pasing_arr);
 			echo "</xmp>";*/
