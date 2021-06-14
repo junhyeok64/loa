@@ -4,7 +4,7 @@
 	}
 	switch($mode) {
 		case "search_info":
-			include "../../snoopy/Snoopy.class.php";
+			include "../../snoopy/Snoopy.class.php"; 
 
 			//닉네임 받아와서 키값으로 가공
 			$url = "https://lostark.game.onstove.com/Profile/Character/".urlencode($nickname);
