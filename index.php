@@ -37,8 +37,9 @@
         .island_icon {background: url(/images/sprite.png) no-repeat 0 0;background-size: 1337px 1302px;}
         .island_icon {width: 23px;height: 22px;background-position: -1271px -1052px;}
         #property h4 {color:white;}
-        .collect_menu li { list-style-type:none;float:left;border: 2px solid white;padding: 0rem 9rem;background-color:#3b0d11;color:white;width:25%;height:7rem;line-height:6.5rem;}
+        .collect_menu li { list-style-type:none;float:left;border: 2px solid white;padding: 0rem 2rem;background-color:#3b0d11;color:white;width:25%;height:7rem;line-height:6.5rem;font-size:2rem; cursor:pointer; }
         .profile-ability-tooltip ul{display:none;position:absolute;background-color:white;}
+        .collect_menu .on {background-color:#8d192b}
         @font-face {
             font-family:'Maplestory';
             /*src: url('./font/Maplestory Bold.ttf') format('truetype');*/
@@ -237,8 +238,8 @@
         <center>
         <div class="row">
             <ul class="collect_menu">
-                <li>섬의 마음</li>
-                <li>오르페우스의 별</li>
+                <li class="island_div on">섬의 마음</li>
+                <li class="orpeus_div">오르페우스의 별</li>
                 <li>위대한 미술품</li>
                 <li>거인의 심장</li>
                 <li>항해 모험물</li>
@@ -250,9 +251,61 @@
         </center>
         <div style="padding-top:15rem;"></div>
 
+        <div class="row block-large-1-2 block-900-full events-list" id="island_div" style="clear:both">
+            <div class="column events-list__item">
+                <h3 class="display-1 events-list__item-title">
+                    <a href="#0" title="">섬의 마음</a>
+                </h3>
+                <ul class="events-list__meta">
+                    <li class="">섬의마음 획득 현황 : <b class="island_collect"></b></li>
+                </ul>
+                <?php
+                    $island_qry = "select * from `gather` where 1=1 and state = 'Y' ";
+                    $island_res = mysqli_query($dbconn, $island_qry);
+                    $island_view = "";
+                    $island_preview = "";
+                    $island_cnt = 0;
+                    while($island_row = mysqli_fetch_array($island_res)) {
+                        if($island_cnt < 9) {
+                            $island_preview .= $island_row["name"]."</br>";
+                        }
+                        $island_view .= $island_row["name"]."</br>";
+                        $island_cnt++;
+                    }
+                ?>
+                <p class="island_zone">
+                    <?php
+                       /* echo $island_preview;
+                        echo "...";*/
+                    ?>
+                    <a href="javascript:;" class="btn btn--primary h-full-width">+ 자세히보기</a>
+                </p>
+                
+            </div> <!-- end events-list__item -->
+        </div>
+        <div class="row block-large-1-2 block-900-full events-list" id="orpeus_div" style="clear:both">
+            <div class="column events-list__item">
+                <h3 class="display-1 events-list__item-title">
+                    <a href="#0" title="">오르페우스의 별</a>
+                </h3>
+                <ul class="events-list__meta">
+                    <li class="">Total : <div class="island_total"></div></li>
+                    <li class="">Collect : <div class="island_collect"></div></li>
+                </ul>
+                <p class="island_zone">
+                    <?php
+                       /* echo $island_preview;
+                        echo "...";*/
+                    ?>
+                    <a href="javascript:;" class="btn btn--primary h-full-width">+ 자세히보기</a>
+                </p>
+            </div>
+        </div>
+
+
         <div class="row block-large-1-2 block-900-full events-list" style="clear:both">
 
-            <div class="column events-list__item">
+            <div class="column events-list__item" id="island_div">
                 <h3 class="display-1 events-list__item-title">
                     <a href="#0" title="">섬의 마음</a>
                 </h3>
@@ -475,6 +528,17 @@
                 $(".profile-ability-tooltip ul").hide();
             });
         })*/
+        $(document).ready(function (){
+            $(".block-large-1-2").hide();
+            $("#island_div").show();
+            $(".collect_menu li").click( function(){
+                $(".block-large-1-2").hide();
+                var div_class = $(this).attr("class");
+                $("#"+div_class).show();
+                $(".collect_menu li").removeClass("on");
+                $(this).addClass("on");
+            })
+        })
     </script>
 
 </body>
