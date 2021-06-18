@@ -53,6 +53,18 @@
             .collect_menu li {width:95%}
 
         }
+        ::-webkit-scrollbar{width: 16px;}
+        ::-webkit-scrollbar-track {background-color:#5D5D5D;}
+        ::-webkit-scrollbar-thumb {background-color:#393939;border-radius: 10px;}
+        ::-webkit-scrollbar-thumb:hover {background: black;}
+        ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+        width:16px;height:16px;background:#393939;}
+
+        .engrave { /*width:100rem;*/position:absolute;overflow-y: scroll;height: 35rem;background-color:black;}
+        .item_img { position:absolute;height: 35rem;width:51rem;background-color:black;}
+        .on {display:block;}
+        .off {display:none;}
+        #property li {float:left;width:50%;}
     </style>
 
 </head>
@@ -149,9 +161,9 @@
 
     <!-- about
     ================================================== -->
-    <section id="about" class="s-about" style="position:fixed;width:100rem;z-index:999">
+    <section id="about" class="s-about" style="position:fixed;width:50rem;z-index:999">
         <div class="row row-y-center about-content">
-            <div class="column large-half medium-full">
+            <div class="column medium-full">
                 <ul class="about-sched">
                     <li>
                         <h4>Today Adventure Island</h4>
@@ -162,10 +174,6 @@
                             인연의돌 / 경험치물약 / 골드
                         </p>
                     </li>
-                </ul>
-            </div>
-            <div class="column large-half medium-full">
-                <ul class="about-sched">
                     <li>
                         <p>
                             <img src="images/island/island_07.jpg" style="width:50%">
@@ -205,10 +213,16 @@
             <div class="column large-half medium-full">
                 <div class="series-content__buttons">
                     <div id="character_img"></div>
-                    <div id="item_img"></div>
-                    <a href="" class="btn btn--large h-full-width">Watch the Video</a>
-                    <a href="" class="btn btn--large h-full-width">Listen To the Message</a>
+                    <a href="javascript:;" class="btn btn--large h-full-width engrave_div">각인 더보기 ▽</a>
+                    <div class="engrave off" >
+
+                    </div>
+                    <a href="javascript:;" class="btn btn--large h-full-width item_div">장비 더보기 ▽</a>
+                    <div class="item_img off" >
+
+                    </div>
                 </div>
+                
 
                 <div class="series-content__subscribe">
                     <p>
@@ -541,6 +555,29 @@
                 $(this).addClass("on");
             })
         })
+        $(".engrave_div").click( function(){
+            if($(".engrave").hasClass("on")) {
+                $(".engrave_div").html("각인 더보기 ▽");
+                $(".engrave").addClass("off");
+                $(".engrave").removeClass("on");
+            } else {
+                $(".engrave_div").html("각인 더보기 △");
+                $(".engrave").addClass("on");
+                $(".engrave").removeClass("off");
+            }
+        })
+        $(".item_div").click( function(){
+            if($(".item_img").hasClass("on")) {
+                $(".item_div").html("장비 더보기 ▽");
+                $(".item_img").addClass("off");
+                $(".item_img").removeClass("on");
+            } else {
+                $(".item_div").html("장비 더보기 △");
+                $(".item_img").addClass("on");
+                $(".item_img").removeClass("off");
+            }
+        })
+
     </script>
 
 </body> 

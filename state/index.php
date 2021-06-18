@@ -81,9 +81,6 @@
 			$item_code = $item_code[1][0];
 
 			//item_img
-			/*
-			<div class="slot1" data-grade="4" data-item="E7b75319_001"><img src="https://cdn-lostark.game.onstove.com/EFUI_IconAtlas/FBM_M_Item/FBM_M_Item_16.png" alt=""></div>
-			*/
 			$item_img = array();
 			for($i=1; $i<=12; $i++) {
 				$data_grade = 4;
@@ -114,6 +111,14 @@
 				preg_match_all($patten,$result,$item_arr);
 				$item_img[$i] = $item_arr[1][0];
 			}
+
+			//각인
+			$_engrave = explode("<h4>각인 효과</h4>", $result);
+			$engrave = explode("<div class=\"swiper-option\">", $_engrave[1]);
+			$engrave = str_replace("<div class=\"swiper-container\">", "", $engrave[0]);
+			$engrave = str_replace("\r", "", $engrave);
+			$engrave = str_replace("\n", "", $engrave);
+			//echo $engrave;exit;
 
 
 			//profile-ability-battle
@@ -161,8 +166,6 @@
 
 
 
-
-
 			//섬의 마음
 			$pasing_arr = explode("<span class=\"now-count\">", $result);
 			$pasing_arr = explode("</span>", $pasing_arr[1]);
@@ -188,11 +191,15 @@
 			$out .= "$('#server').html('".$server."');";
 			$out .= "$('#character_img').html('".$character_img."');";
 
-			$item_out = "";
+			$item_out = "<center>";
+			$item_half = floor(count($item_img)/2);
 			for($i=1; $i<count(($item_img))+1; $i++) {
 				$item_out .= "<img src=\"".$item_img[$i]."\">";
+				$item_out .= ($item_half == $i) ? "<br/>" : "";			
 			}
-			$out .= "$('#item_img').html('".$item_out."');";
+			$item_out .= "</center>";
+			$out .= "$('.item_img').html('".$item_out."');";
+			$out .= "$('.engrave').html('".$engrave."')";
 
 			$out .= "</script>";
 			//$out .= "<script type='text/javascript'>$(document).ready(function (){ $('#property > div').hover(function (){ $('.profile-ability-tooltip ul').show();}, function() { $('.profile-ability-tooltip ul').hide();});})</script>";
