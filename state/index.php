@@ -28,6 +28,11 @@
 			$job = $background_img = $character_img = "";
 
 			switch($job_img) {
+				case "https://cdn-lostark.game.onstove.com/2018/obt/assets/images/common/thumb/emblem_berserker.png":
+					$job = "버서커";
+					//$background_img = "images/character/img_index_v4.jpg";
+					$character_img = "<img src=\"https://cdn-lostark.game.onstove.com/2018/obt/assets/images/pc/profile/berserker.png\">";
+				break;
 				case "https://cdn-lostark.game.onstove.com/2018/obt/assets/images/common/thumb/emblem_gunslinger.png":
 					$job = "건슬링어";
 					$background_img = "images/character/img_index_v4.jpg";
@@ -178,6 +183,9 @@
 
 			$is_collection = explode("<ul class=\"list\">", $result);
 			$is_collection = explode("</ul>", $is_collection[1]);
+			$is_collection = str_replace("\n", "", $is_collection[0]);
+			$is_collection = str_replace("\r", "", $is_collection);
+			$is_collection = str_replace("\'", "\"", $is_collection);
 
 			$out .= "<script type=\"text/javascript\">";
 			$nickname = !empty($job_img) ? "<img src=\"".$job_img."\" >".$nickname : $nickname;
@@ -199,7 +207,8 @@
 			}
 			$item_out .= "</center>";
 			$out .= "$('.item_img').html('".$item_out."');";
-			$out .= "$('.engrave').html('".$engrave."')";
+			$out .= "$('.engrave').html('".$engrave."');";
+			$out .= "$('.island_zone').html('<ul>".$is_collection."</ul>');";
 
 			$out .= "</script>";
 			//$out .= "<script type='text/javascript'>$(document).ready(function (){ $('#property > div').hover(function (){ $('.profile-ability-tooltip ul').show();}, function() { $('.profile-ability-tooltip ul').hide();});})</script>";

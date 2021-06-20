@@ -33,13 +33,17 @@
     <style type="text/css">
         
         #user_info {padding-top:30px;}
-        .island_zone {font-size:15px; padding:0px 30px;}
+        .island_zone {font-size:15px; padding:0px 30px; height:30rem; overflow-y:auto;}
         .island_icon {background: url(/images/sprite.png) no-repeat 0 0;background-size: 1337px 1302px;}
         .island_icon {width: 23px;height: 22px;background-position: -1271px -1052px;}
         #property h4 {color:white;}
         .collect_menu li { list-style-type:none;float:left;border: 2px solid white;padding: 0rem 2rem;background-color:#3b0d11;color:white;width:25%;height:7rem;line-height:6.5rem;font-size:2rem; cursor:pointer; }
         .profile-ability-tooltip ul{display:none;position:absolute;background-color:white;}
         .collect_menu .on {background-color:#8d192b}
+        .Adventure_island {left:33%;position:absolute;width:60rem;z-index:999;background-color:#3b0d11;padding:5rem}
+        .Adventure_island li {color:white;}
+        .s-series {padding:2rem 0;}
+        .island_zone em {float:right;}
         @font-face {
             font-family:'Maplestory';
             /*src: url('./font/Maplestory Bold.ttf') format('truetype');*/
@@ -51,7 +55,11 @@
             .h-remove-bottom {width:100%;}
             .btn--about{width:100%;}
             .collect_menu li {width:95%}
+            .Adventure_island {left:15%;width:30rem;padding:3rem;}
 
+        }
+        @media screen and (max-width:1200px) {
+            .Adventure_island {left:40%;}
         }
         ::-webkit-scrollbar{width: 16px;}
         ::-webkit-scrollbar-track {background-color:#5D5D5D;}
@@ -130,40 +138,11 @@
                 </div>
 
                 <div class="hero-content__buttons" style="margin-top: 155px;">
-                    <a href="javascript:;" class="btn btn--stroke hover_div" data-tooltip="#about">Adventure Island</a>
+                    <a href="javascript:;" class="btn btn--stroke show_div" data-tooltip=".Adventure_island">Adventure Island</a>
                     <a href="https://lostark.game.onstove.com/Main" class="btn btn--stroke" target="_blank">Official Page</a>
                 </div>
             </div> <!-- end hero-content__text -->
-
-        </div> <!-- end hero-content -->
-
-        <ul class="hero-social">
-            <li class="hero-social__title">Follow Us</li>
-            <li>
-                <a href="#0" title="">Facebook</a>
-            </li>
-            <li>
-                <a href="#0" title="">YouTube</a>
-            </li>
-            <li>
-                <a href="#0" title="">Instagram</a>
-            </li>
-        </ul> <!-- end hero-social -->
-
-        <div class="hero-scroll">
-            <a href="#about" class="scroll-link smoothscroll">
-                Scroll For More
-            </a>
-        </div> <!-- end hero-scroll -->
-
-    </section> <!-- end s-hero -->
-
-
-    <!-- about
-    ================================================== -->
-    <section id="about" class="s-about" style="position:fixed;width:50rem;z-index:999">
-        <div class="row row-y-center about-content">
-            <div class="column medium-full">
+            <div class="Adventure_island" style="display:none;">
                 <ul class="about-sched">
                     <li>
                         <h4>Today Adventure Island</h4>
@@ -184,8 +163,29 @@
                     </li>
                 </ul>
             </div>
-        </div> <!-- end about-content -->
-    </section> <!-- end s-about -->
+
+        </div> <!-- end hero-content -->
+
+        <ul class="hero-social">
+            <li class="hero-social__title">Follow Us</li>
+            <li>
+                <a href="#0" title="">Facebook</a>
+            </li>
+            <li>
+                <a href="#0" title="">YouTube</a>
+            </li>
+            <li>
+                <a href="#0" title="">Instagram</a>
+            </li>
+        </ul> <!-- end hero-social -->
+
+        <!--<div class="hero-scroll">
+            <a href="#about" class="scroll-link smoothscroll">
+                Scroll For More
+            </a>
+        </div> <!-- end hero-scroll -->
+
+    </section> <!-- end s-hero -->
 
 
     <!-- connect
@@ -193,7 +193,7 @@
 
     <!-- series
     ================================================== -->
-    <section class="s-series">
+    <section class="s-series" id="about" style="display:none;">
 
         <div class="series-img" id="user_info" style="background-image: url('images/character/img_index_v2.jpg');background-position:85%;"></div>
 
@@ -242,7 +242,7 @@
 
     </section> <!-- end s-series -->
 
-    <section class="s-events" id="collect_section">
+    <section class="s-events" id="collect_section" style="display:none;">
         <div id="user_info_sub"></div>
 
         <!--<div class="row events-header">
@@ -430,7 +430,7 @@
 
     <!-- Social
     ================================================== -->
-    <section class="s-social">
+    <section class="s-social" style="display:none;" id="social_section">
             
         <div class="row social-content">
             <div class="column">
@@ -536,6 +536,11 @@
     <script src="js/total.js"></script>
 
     <script type="text/javascript">
+        $(".show_div").hover(function(e) {
+            $($(this).data("tooltip")).stop().show(200);
+        }, function() {
+            $($(this).data("tooltip")).hide();
+        });
         /*$(document).ready(function (){
             $("#property > div").hover(function (){
                 //alert("aa");
