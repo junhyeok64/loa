@@ -37,13 +37,20 @@
         .island_icon {background: url(/images/sprite.png) no-repeat 0 0;background-size: 1337px 1302px;}
         .island_icon {width: 23px;height: 22px;background-position: -1271px -1052px;}
         #property h4 {color:white;}
-        .collect_menu li { list-style-type:none;float:left;border: 2px solid white;padding: 0rem 2rem;background-color:#3b0d11;color:white;width:25%;height:7rem;line-height:6.5rem;font-size:2rem; cursor:pointer; }
+        .collect_menu li { list-style-type:none;float:left;border: 2px solid #5D5D5D;padding: 0rem 2rem;background-color:#3b0d11;color:white;width:25%;height:7rem;line-height:6.5rem;font-size:2rem; cursor:pointer; }
         .profile-ability-tooltip ul{display:none;position:absolute;background-color:white;}
         .collect_menu .on {background-color:#8d192b}
         .Adventure_island {left:33%;position:absolute;width:60rem;z-index:999;background-color:#3b0d11;padding:5rem}
         .Adventure_island li {color:white;}
         .s-series {padding:2rem 0;}
         .island_zone em {float:right;}
+        .collect_menu {padding:0 12rem}
+        .island_class {margin: 4rem auto;}
+        .padding_top_15 {padding-top:15rem;}
+        .collect_title {padding-top:7rem;}
+        #collect_section{padding-top: 0px;background-image: url(/images/collect.jpg);background-repeat: no-repeat;background-size: 200rem 120rem;background-position: center;}
+        #island_div{/*background-color: rgba( 255, 255, 255, 0.5 );*/}
+        #island_div  h2, li {color:white;}
         @font-face {
             font-family:'Maplestory';
             /*src: url('./font/Maplestory Bold.ttf') format('truetype');*/
@@ -56,7 +63,9 @@
             .btn--about{width:100%;}
             .collect_menu li {width:95%}
             .Adventure_island {left:15%;width:30rem;padding:3rem;}
-
+            .collect_menu {padding:0}
+            .island_class {margin:0}
+            .padding_top_15 {padding-top:5rem;}
         }
         @media screen and (max-width:1200px) {
             .Adventure_island {left:40%;}
@@ -242,7 +251,7 @@
 
     </section> <!-- end s-series -->
 
-    <section class="s-events" id="collect_section" style="display:none;">
+    <section class="s-events" id="collect_section" style="display:none;padding-top:0;">
         <div id="user_info_sub"></div>
 
         <!--<div class="row events-header">
@@ -250,10 +259,10 @@
                 <h2 class="subhead">Island</h2>
             </div>
         </div> <!-- end event-header -->
-        <div style="padding-top:15rem;"></div>
+        <div class="padding_top_15" style=""></div>
         <center>
-        <div class="row">
-            <ul class="collect_menu">
+        <div class="row" style="display:contents;">
+            <ul class="collect_menu" style="">
                 <li class="island_div on">섬의 마음</li>
                 <li class="orpeus_div">오르페우스의 별</li>
                 <li>위대한 미술품</li>
@@ -265,18 +274,17 @@
             </ul>
         </div>
         </center>
-        <div style="padding-top:15rem;"></div>
 
-        <div class="row block-large-1-2 block-900-full events-list" id="island_div" style="clear:both">
+        <div class="row block-large-1-2 block-900-full events-list" id="island_div" style="clear:both;margin-top:5rem;">
+            <h2 class="display-1 events-list__item-title collect_title">
+                섬의 마음
+            </h2>
+            <ul class="events-list__meta" style="width:100%">
+                <li class="">섬의마음 획득 현황 : <b class="island_collect"></b></li>
+            </ul>
             <div class="column events-list__item">
-                <h3 class="display-1 events-list__item-title">
-                    <a href="#0" title="">섬의 마음</a>
-                </h3>
-                <ul class="events-list__meta">
-                    <li class="">섬의마음 획득 현황 : <b class="island_collect"></b></li>
-                </ul>
                 <?php
-                    $island_qry = "select * from `gather` where 1=1 and state = 'Y' ";
+                    /*$island_qry = "select * from `gather` where 1=1 and state = 'Y' ";
                     $island_res = mysqli_query($dbconn, $island_qry);
                     $island_view = "";
                     $island_preview = "";
@@ -287,13 +295,15 @@
                         }
                         $island_view .= $island_row["name"]."</br>";
                         $island_cnt++;
-                    }
+                    }*/
                 ?>
+                <p class="island_img">
+                    <img src="/images/island2.png" style="margin:0 auto;display:flex;width:40rem" alt="섬의 마음">
+                </p>
+              
+            </div> <!-- end events-list__item -->
+            <div class="column events-list__item island_class" style="">
                 <p class="island_zone">
-                    <?php
-                       /* echo $island_preview;
-                        echo "...";*/
-                    ?>
                     <a href="javascript:;" class="btn btn--primary h-full-width">+ 자세히보기</a>
                 </p>
                 
