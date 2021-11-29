@@ -34,7 +34,7 @@
         
         #user_info {padding-top:30px;}
         .island_zone {font-size:15px; padding:0px 30px; height:30rem; overflow-y:auto;}
-        .island_icon {background: url(/images/sprite.png) no-repeat 0 0;background-size: 1337px 1302px;}
+        .island_icon {background: url(<?=base_img?>/images/sprite.png) no-repeat 0 0;background-size: 1337px 1302px;}
         .island_icon {width: 23px;height: 22px;background-position: -1271px -1052px;}
         #property h4 {color:white;}
         .collect_menu li { list-style-type:none;float:left;border: 2px solid #5D5D5D;padding: 0rem 2rem;background-color:#3b0d11;color:white;width:25%;height:7rem;line-height:6.5rem;font-size:2rem; cursor:pointer; }
@@ -47,8 +47,8 @@
         .collect_menu {padding:0 12rem}
         .island_class {margin: 4rem auto;}
         .padding_top_15 {padding-top:15rem;}
-        .collect_title {padding-top:7rem;}
-        #collect_section{padding-top: 0px;background-image: url(/images/collect.jpg);background-repeat: no-repeat;background-size: 200rem 120rem;background-position: center;}
+        .collect_title {padding-top:7rem;color:white;}
+        #collect_section{padding-top: 0px;background-image: url(<?=base_img?>/images/collect/bg_detail_exploitationPeriod5.jpg);background-repeat: no-repeat;background-size: 200rem 120rem;background-position: center;}
         #island_div{/*background-color: rgba( 255, 255, 255, 0.5 );*/}
         #island_div  h2, li {color:white;}
         @font-face {
@@ -82,6 +82,10 @@
         .on {display:block;}
         .off {display:none;}
         #property li {float:left;width:50%;}
+        .events-list__item ul{list-style:none;}
+        .events-list__item span{margin-right:5px;}
+        .star_zone span {display:none;}
+        .collect_div {clear:both;margin-top:5rem;background-color:rgba( 0, 0, 0, 0.5 );}
     </style>
 
 </head>
@@ -275,7 +279,7 @@
         </div>
         </center>
 
-        <div class="row block-large-1-2 block-900-full events-list" id="island_div" style="clear:both;margin-top:5rem;">
+        <div class="row block-large-1-2 block-900-full events-list collect_div" id="island_div" style="">
             <h2 class="display-1 events-list__item-title collect_title">
                 섬의 마음
             </h2>
@@ -298,7 +302,7 @@
                     }*/
                 ?>
                 <p class="island_img">
-                    <img src="/images/island2.png" style="margin:0 auto;display:flex;width:40rem" alt="섬의 마음">
+                    <img src="<?=base_img?>/images/island2.png" style="margin:0 auto;display:flex;width:40rem" alt="섬의 마음">
                 </p>
               
             </div> <!-- end events-list__item -->
@@ -309,24 +313,26 @@
                 
             </div> <!-- end events-list__item -->
         </div>
-        <div class="row block-large-1-2 block-900-full events-list" id="orpeus_div" style="clear:both">
-            <div class="column events-list__item">
-                <h3 class="display-1 events-list__item-title">
-                    <a href="#0" title="">오르페우스의 별</a>
-                </h3>
-                <ul class="events-list__meta">
-                    <li class="">Total : <div class="island_total"></div></li>
-                    <li class="">Collect : <div class="island_collect"></div></li>
-                </ul>
-                <p class="island_zone">
-                    <?php
-                       /* echo $island_preview;
-                        echo "...";*/
-                    ?>
+        <div class="row block-large-1-2 block-900-full events-list collect_div" id="orpeus_div" style="">
+            <h2 class="display-1 events-list__item-title collect_title">
+                오르페우스의 별
+            </h2>
+            <ul class="events-list__meta" style="width:100%">
+                <li class="">오르페우스의 별 획득 현황 : <b class="star_collect"></b></li>
+            </ul>
+            
+            <div class="column events-list__item star_class" style="">
+                <p class="star_zone">
                     <a href="javascript:;" class="btn btn--primary h-full-width">+ 자세히보기</a>
+                </p>   
+            </div> <!-- end events-list__item -->
+            <div class="column events-list__item">
+                <p class="star_img">
+                    <img src="<?=base_img?>/images/star.png" style="margin:0 auto;display:flex;width:40rem" alt="오르페우스의 별">
                 </p>
-            </div>
+            </div> <!-- end events-list__item -->
         </div>
+       
 
 
         <div class="row block-large-1-2 block-900-full events-list" style="clear:both">
