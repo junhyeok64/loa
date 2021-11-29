@@ -169,6 +169,8 @@
 			$ss->submit($collection_url, $collection_data);
 			$result = $ss->results;
 
+			//echo $result;exit;
+
 
 
 			//섬의 마음
@@ -187,11 +189,31 @@
 			$is_collection = str_replace("\r", "", $is_collection);
 			$is_collection = str_replace("\'", "\"", $is_collection);
 
+			//오페별
+			$pasing_arr = explode("<span class=\"now-count\">", $result);
+			$pasing_arr = explode("</span>", $pasing_arr[2]);
+			$star_collect = $pasing_arr[0];
+
+			//max-count
+			$pasing_arr = explode("<span class=\"max-count\">", $result);
+			$pasing_arr = explode("</span>", $pasing_arr[2]);
+			$star_total = $pasing_arr[0];
+
+			$star_collection = explode("<ul class=\"list\">", $result);
+			$star_collection = explode("</ul>", $star_collection[2]);
+			$star_collection = str_replace("\n", "", $star_collection[0]);
+			$star_collection = str_replace("\r", "", $star_collection);
+			$star_collection = str_replace("\'", "\"", $star_collection);
+
+
+
 			$out .= "<script type=\"text/javascript\">";
 			$nickname = !empty($job_img) ? "<img src=\"".$job_img."\" >".$nickname : $nickname;
 			$out .= "$('#nickname').html('".$nickname."');";
 			$out .= "$('.island_collect').html('".$island_collect." / ".$island_total."');";
 			$out .= "$('.island_total').html('".$island_total."');";
+			$out .= "$('.star_collect').html('".$star_collect." / ".$star_total."');";
+			$out .= "$('.star_total').html('".$star_total."');";
 			if($background_img != "") {
 				$out .= "$('.series-img').css(\"background-image\", \"url('".$background_img."')\");";
 			}
@@ -209,6 +231,7 @@
 			$out .= "$('.item_img').html('".$item_out."');";
 			$out .= "$('.engrave').html('".$engrave."');";
 			$out .= "$('.island_zone').html('<ul>".$is_collection."</ul>');";
+			$out .= "$('.star_zone').html('<ul>".$star_collection."</ul>');";
 
 			$out .= "</script>";
 			//$out .= "<script type='text/javascript'>$(document).ready(function (){ $('#property > div').hover(function (){ $('.profile-ability-tooltip ul').show();}, function() { $('.profile-ability-tooltip ul').hide();});})</script>";
