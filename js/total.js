@@ -35,7 +35,7 @@ function search_info(nickname) {
 			//$("#user_info").html(e);
 			$("#about").show();
 			$("#collect_section").show();
-			$("#social_section").show();
+			//$("#social_section").show();
 			$("#user_info_sub").html(e);
 			//$("#user_info").click();
 			var target = $("#user_info");
