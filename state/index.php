@@ -30,9 +30,21 @@
 			switch($job_img) {
 				case "https://cdn-lostark.game.onstove.com/2018/obt/assets/images/common/thumb/emblem_berserker.png":
 					$job = "버서커";
-					//$background_img = "images/character/img_index_v4.jpg";
 					$character_img = "<img src=\"https://cdn-lostark.game.onstove.com/2018/obt/assets/images/pc/profile/berserker.png\">";
 				break;
+				case "https://cdn-lostark.game.onstove.com/2018/obt/assets/images/common/thumb/emblem_warlord.png":
+					$job = "워로드";
+					$character_img = "<img src=\"https://cdn-lostark.game.onstove.com/2018/obt/assets/images/pc/profile/warlord.png\">";
+				break;
+				case "https://cdn-lostark.game.onstove.com/2018/obt/assets/images/common/thumb/emblem_destroyer.png":
+					$job = "디스트로이어";
+					$character_img = "<img src=\"https://cdn-lostark.game.onstove.com/2018/obt/assets/images/pc/profile/destroyer.png\">";
+				break;
+				case "https://cdn-lostark.game.onstove.com/2018/obt/assets/images/common/thumb/emblem_holyknight.png":
+					$job = "홀리나이트";
+					$character_img = "<img src=\"https://cdn-lostark.game.onstove.com/2018/obt/assets/images/pc/profile/holyknight.png\">";
+				break;
+
 				case "https://cdn-lostark.game.onstove.com/2018/obt/assets/images/common/thumb/emblem_gunslinger.png":
 					$job = "건슬링어";
 					$background_img = "images/character/img_index_v4.jpg";
@@ -44,6 +56,7 @@
 				break;
 				case "https://cdn-lostark.game.onstove.com/2018/obt/assets/images/common/thumb/emblem_bard.png":
 					$job = "바드";
+					$character_img = "<img src=\"https://cdn-lostark.game.onstove.com/2018/obt/assets/images/pc/profile/bard.png\">";
 					$background_img = "images/character/bard.jpg";
 				break;
 				default:
@@ -123,18 +136,7 @@
 			$engrave = str_replace("<div class=\"swiper-container\">", "", $engrave[0]);
 			$engrave = str_replace("\r", "", $engrave);
 			$engrave = str_replace("\n", "", $engrave);
-			//echo $engrave;exit;
-
-
-			//profile-ability-battle
-
-			//echo substr($result, "<div class=\"profile-ability-basic\">", "</div>");
-
-
-			/*$patten = "/<div class=\"profile-ability-basic\">(.*?)<\/div>/is";
-			preg_match_all($patten,$result,$memberno); */
-			//profile-ability-battle
-
+			
 
 			$patten = "/var _memberNo = \'(.*?)\'/is";
 			preg_match_all($patten,$result,$memberno); 
@@ -171,51 +173,73 @@
 
 			//echo $result;exit;
 
+			$coll_arr = array();
+            $coll_arr[0]["name"] = "island";
+            $coll_arr[0]["name_kr"] = "섬의 마음";
+            $coll_arr[0]["num"] = 1;
 
+            $coll_arr[1]["name"] = "star";
+            $coll_arr[1]["name_kr"] = "오르페우스의 별";
+            $coll_arr[1]["num"] = 2;
 
-			//섬의 마음
-			$pasing_arr = explode("<span class=\"now-count\">", $result);
-			$pasing_arr = explode("</span>", $pasing_arr[1]);
-			$island_collect = $pasing_arr[0];
+            $coll_arr[2]["name"] = "heart";
+            $coll_arr[2]["name_kr"] = "거인의 심장";
+            $coll_arr[2]["num"] = 3;
 
-			//max-count
-			$pasing_arr = explode("<span class=\"max-count\">", $result);
-			$pasing_arr = explode("</span>", $pasing_arr[1]);
-			$island_total = $pasing_arr[0];
+            $coll_arr[3]["name"] = "art";
+            $coll_arr[3]["name_kr"] = "위대한 미술품";
+            $coll_arr[3]["num"] = 4;
 
-			$is_collection = explode("<ul class=\"list\">", $result);
-			$is_collection = explode("</ul>", $is_collection[1]);
-			$is_collection = str_replace("\n", "", $is_collection[0]);
-			$is_collection = str_replace("\r", "", $is_collection);
-			$is_collection = str_replace("\'", "\"", $is_collection);
+            $coll_arr[4]["name"] = "seed";
+            $coll_arr[4]["name_kr"] = "모코코 씨앗";
+            $coll_arr[4]["num"] = 5;
 
-			//오페별
-			$pasing_arr = explode("<span class=\"now-count\">", $result);
-			$pasing_arr = explode("</span>", $pasing_arr[2]);
-			$star_collect = $pasing_arr[0];
+            $coll_arr[5]["name"] = "tour";
+            $coll_arr[5]["name_kr"] = "항해 모험물";
+            $coll_arr[5]["num"] = 6;
 
-			//max-count
-			$pasing_arr = explode("<span class=\"max-count\">", $result);
-			$pasing_arr = explode("</span>", $pasing_arr[2]);
-			$star_total = $pasing_arr[0];
+            $coll_arr[6]["name"] = "token";
+            $coll_arr[6]["name_kr"] = "이그네아의 증표";
+            $coll_arr[6]["num"] = 7;
 
-			$star_collection = explode("<ul class=\"list\">", $result);
-			$star_collection = explode("</ul>", $star_collection[2]);
-			$star_collection = str_replace("\n", "", $star_collection[0]);
-			$star_collection = str_replace("\r", "", $star_collection);
-			$star_collection = str_replace("\'", "\"", $star_collection);
-
-
+            $coll_arr[7]["name"] = "leaf";
+            $coll_arr[7]["name_kr"] = "세계수의 잎";
+            $coll_arr[7]["num"] = 8;
 
 			$out .= "<script type=\"text/javascript\">";
+			
+
+			for($coll_cnt=0; $coll_cnt<count($coll_arr); $coll_cnt++) {
+				//섬의 마음
+				$pasing_arr = explode("<span class=\"now-count\">", $result);
+				$pasing_arr = explode("</span>", $pasing_arr[$coll_arr[$coll_cnt]["num"]]);
+				${$coll_arr[$coll_cnt]["name"]."_collect"} = $pasing_arr[0];
+
+				//max-count
+				$pasing_arr = explode("<span class=\"max-count\">", $result);
+				$pasing_arr = explode("</span>", $pasing_arr[$coll_arr[$coll_cnt]["num"]]);
+				${$coll_arr[$coll_cnt]["name"]."_total"} = $pasing_arr[0];
+
+				${$coll_arr[$coll_cnt]["name"]."_collection"} = explode("<ul class=\"list\">", $result);
+				${$coll_arr[$coll_cnt]["name"]."_collection"} = explode("</ul>", ${$coll_arr[$coll_cnt]["name"]."_collection"}[$coll_arr[$coll_cnt]["num"]]);
+				${$coll_arr[$coll_cnt]["name"]."_collection"} = str_replace("\n", "", ${$coll_arr[$coll_cnt]["name"]."_collection"}[0]);
+				${$coll_arr[$coll_cnt]["name"]."_collection"} = str_replace("\r", "", ${$coll_arr[$coll_cnt]["name"]."_collection"});
+				${$coll_arr[$coll_cnt]["name"]."_collection"} = str_replace("\'", "\"", ${$coll_arr[$coll_cnt]["name"]."_collection"});
+
+				$out .= "$('.".$coll_arr[$coll_cnt]["name"]."_collect').html('".${$coll_arr[$coll_cnt]["name"]."_collect"}." / ".${$coll_arr[$coll_cnt]["name"]."_total"}."');";
+				$out .= "$('.".$coll_arr[$coll_cnt]["name"]."_zone').html('<ul>".${$coll_arr[$coll_cnt]["name"]."_collection"}."</ul>');";
+			}
+
+
+			
 			$nickname = !empty($job_img) ? "<img src=\"".$job_img."\" >".$nickname : $nickname;
 			$out .= "$('#nickname').html('".$nickname."');";
-			$out .= "$('.island_collect').html('".$island_collect." / ".$island_total."');";
-			$out .= "$('.island_total').html('".$island_total."');";
-			$out .= "$('.star_collect').html('".$star_collect." / ".$star_total."');";
-			$out .= "$('.star_total').html('".$star_total."');";
+			//$out .= "$('.star_total').html('".$heart_total."');";
 			if($background_img != "") {
 				$out .= "$('.series-img').css(\"background-image\", \"url('".$background_img."')\");";
+			} else {
+				$out .= "$('.series-img').css(\"background-image\", \"none\");";
+
 			}
 			$out .= "$('#property').html(\"".$property.$ability."\");";
 			$out .= "$('#server').html('".$server."');";
@@ -230,8 +254,10 @@
 			$item_out .= "</center>";
 			$out .= "$('.item_img').html('".$item_out."');";
 			$out .= "$('.engrave').html('".$engrave."');";
-			$out .= "$('.island_zone').html('<ul>".$is_collection."</ul>');";
-			$out .= "$('.star_zone').html('<ul>".$star_collection."</ul>');";
+			
+			/*$out .= "$('.star_zone').html('<ul>".$star_collection."</ul>');";
+			$out .= "$('.heart_zone').html('<ul>".$heart_collection."</ul>');";
+			$out .= "$('.art_zone').html('<ul>".$heart_collection."</ul>');";*/
 
 			$out .= "</script>";
 			//$out .= "<script type='text/javascript'>$(document).ready(function (){ $('#property > div').hover(function (){ $('.profile-ability-tooltip ul').show();}, function() { $('.profile-ability-tooltip ul').hide();});})</script>";

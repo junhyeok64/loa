@@ -33,7 +33,7 @@
     <style type="text/css">
         
         #user_info {padding-top:30px;}
-        .island_zone {font-size:15px; padding:0px 30px; height:30rem; overflow-y:auto;}
+        .island_zone, .heart_zone, .art_zone, .tour_zone, .seed_zone, .token_zone, .leaf_zone {font-size:15px; padding:0px 30px; height:30rem; overflow-y:auto;}
         .island_icon {background: url(<?=base_img?>/images/sprite.png) no-repeat 0 0;background-size: 1337px 1302px;}
         .island_icon {width: 23px;height: 22px;background-position: -1271px -1052px;}
         #property h4 {color:white;}
@@ -84,8 +84,9 @@
         #property li {float:left;width:50%;}
         .events-list__item ul{list-style:none;}
         .events-list__item span{margin-right:5px;}
-        .star_zone span {display:none;}
-        .collect_div {clear:both;margin-top:5rem;background-color:rgba( 0, 0, 0, 0.5 );}
+        .star_zone span, .heart_zone span, .art_zone span {display:none;}
+        .collect_div {clear:both;margin-top:5rem;background-color:rgba( 0, 0, 0, 0.5 ); padding: 0 35px;}
+        #social_section {display:none;}
     </style>
 
 </head>
@@ -268,173 +269,78 @@
         <div class="row" style="display:contents;">
             <ul class="collect_menu" style="">
                 <li class="island_div on">섬의 마음</li>
-                <li class="orpeus_div">오르페우스의 별</li>
-                <li>위대한 미술품</li>
-                <li>거인의 심장</li>
-                <li>항해 모험물</li>
-                <li>모코코 씨앗</li>
-                <li>이그네아의 증표</li>
-                <li>세계수의 잎</li>
+                <li class="star_div">오르페우스의 별</li>
+                <li class="art_div">위대한 미술품</li>
+                <li class="heart_div">거인의 심장</li>
+                <li class="tour_div">항해 모험물</li>
+                <li class="seed_div">모코코 씨앗</li>
+                <li class="token_div">이그네아의 증표</li>
+                <li class="leaf_div">세계수의 잎</li>
             </ul>
         </div>
         </center>
 
-        <div class="row block-large-1-2 block-900-full events-list collect_div" id="island_div" style="">
+        <?php
+            $coll_arr = array();
+            $coll_arr[0]["name"] = "island";
+            $coll_arr[0]["name_kr"] = "섬의 마음";
+            $coll_arr[0]["num"] = 1;
+
+            $coll_arr[1]["name"] = "star";
+            $coll_arr[1]["name_kr"] = "오르페우스의 별";
+            $coll_arr[1]["num"] = 2;
+
+            $coll_arr[2]["name"] = "heart";
+            $coll_arr[2]["name_kr"] = "거인의 심장";
+            $coll_arr[2]["num"] = 3;
+
+            $coll_arr[3]["name"] = "art";
+            $coll_arr[3]["name_kr"] = "위대한 미술품";
+            $coll_arr[3]["num"] = 4;
+
+            $coll_arr[4]["name"] = "seed";
+            $coll_arr[4]["name_kr"] = "모코코 씨앗";
+            $coll_arr[4]["num"] = 5;
+
+            $coll_arr[5]["name"] = "tour";
+            $coll_arr[5]["name_kr"] = "항해 모험물";
+            $coll_arr[5]["num"] = 6;
+
+            $coll_arr[6]["name"] = "token";
+            $coll_arr[6]["name_kr"] = "이그네아의 증표";
+            $coll_arr[6]["num"] = 7;
+
+            $coll_arr[7]["name"] = "leaf";
+            $coll_arr[7]["name_kr"] = "세계수의 잎";
+            $coll_arr[7]["num"] = 8;
+
+            for($coll_cnt=0; $coll_cnt<count($coll_arr); $coll_cnt++) {
+        ?>
+        <div class="row block-large-1-2 block-900-full events-list collect_div" id="<?=$coll_arr[$coll_cnt]["name"]?>_div" style="">
             <h2 class="display-1 events-list__item-title collect_title">
-                섬의 마음
+                <?=$coll_arr[$coll_cnt]["name_kr"]?>
             </h2>
             <ul class="events-list__meta" style="width:100%">
-                <li class="">섬의마음 획득 현황 : <b class="island_collect"></b></li>
+                <li class=""><?=$coll_arr[$coll_cnt]["name_kr"]?> 획득 현황 : <b class="<?=$coll_arr[$coll_cnt]["name"]?>_collect"></b></li>
             </ul>
             <div class="column events-list__item">
-                <?php
-                    /*$island_qry = "select * from `gather` where 1=1 and state = 'Y' ";
-                    $island_res = mysqli_query($dbconn, $island_qry);
-                    $island_view = "";
-                    $island_preview = "";
-                    $island_cnt = 0;
-                    while($island_row = mysqli_fetch_array($island_res)) {
-                        if($island_cnt < 9) {
-                            $island_preview .= $island_row["name"]."</br>";
-                        }
-                        $island_view .= $island_row["name"]."</br>";
-                        $island_cnt++;
-                    }*/
-                ?>
-                <p class="island_img">
-                    <img src="<?=base_img?>/images/island2.png" style="margin:0 auto;display:flex;width:40rem" alt="섬의 마음">
+                <p class="<?=$coll_arr[$coll_cnt]["name"]?>_img">
+                    <img src="<?=base_img?>/images/<?=$coll_arr[$coll_cnt]["name"]?>.png" style="margin:0 auto;display:flex;width:40rem" alt="<?=$coll_arr[$coll_cnt]["name_kr"]?>">
                 </p>
               
             </div> <!-- end events-list__item -->
-            <div class="column events-list__item island_class" style="">
-                <p class="island_zone">
+            <div class="column events-list__item <?=$coll_arr[$coll_cnt]["name"]?>_class" style="">
+                <p class="<?=$coll_arr[$coll_cnt]["name"]?>_zone">
                     <a href="javascript:;" class="btn btn--primary h-full-width">+ 자세히보기</a>
                 </p>
                 
             </div> <!-- end events-list__item -->
         </div>
-        <div class="row block-large-1-2 block-900-full events-list collect_div" id="orpeus_div" style="">
-            <h2 class="display-1 events-list__item-title collect_title">
-                오르페우스의 별
-            </h2>
-            <ul class="events-list__meta" style="width:100%">
-                <li class="">오르페우스의 별 획득 현황 : <b class="star_collect"></b></li>
-            </ul>
-            
-            <div class="column events-list__item star_class" style="">
-                <p class="star_zone">
-                    <a href="javascript:;" class="btn btn--primary h-full-width">+ 자세히보기</a>
-                </p>   
-            </div> <!-- end events-list__item -->
-            <div class="column events-list__item">
-                <p class="star_img">
-                    <img src="<?=base_img?>/images/star.png" style="margin:0 auto;display:flex;width:40rem" alt="오르페우스의 별">
-                </p>
-            </div> <!-- end events-list__item -->
-        </div>
-       
+        <?php
+            }
+        ?>
 
-
-        <div class="row block-large-1-2 block-900-full events-list" style="clear:both">
-
-            <div class="column events-list__item" id="island_div">
-                <h3 class="display-1 events-list__item-title">
-                    <a href="#0" title="">섬의 마음</a>
-                </h3>
-                <ul class="events-list__meta">
-                    <li class="">섬의마음 획득 현황 : <b class="island_collect"></b></li>
-                </ul>
-                <?php
-                    $island_qry = "select * from `gather` where 1=1 and state = 'Y' ";
-                    $island_res = mysqli_query($dbconn, $island_qry);
-                    $island_view = "";
-                    $island_preview = "";
-                    $island_cnt = 0;
-                    while($island_row = mysqli_fetch_array($island_res)) {
-                        if($island_cnt < 9) {
-                            $island_preview .= $island_row["name"]."</br>";
-                        }
-                        $island_view .= $island_row["name"]."</br>";
-                        $island_cnt++;
-                    }
-                ?>
-                <p class="island_zone">
-                    <?php
-                       /* echo $island_preview;
-                        echo "...";*/
-                    ?>
-                    <a href="javascript:;" class="btn btn--primary h-full-width">+ 자세히보기</a>
-                </p>
-                
-            </div> <!-- end events-list__item -->
-
-            <div class="column events-list__item">
-                <h3 class="display-1 events-list__item-title">
-                    <a href="#0" title="">오르페우스의 별</a>
-                </h3>
-                <ul class="events-list__meta">
-                    <li class="">Total : <div class="island_total"></div></li>
-                    <li class="">Collect : <div class="island_collect"></div></li>
-                </ul>
-                <p class="island_zone">
-                    <?php
-                       /* echo $island_preview;
-                        echo "...";*/
-                    ?>
-                    <a href="javascript:;" class="btn btn--primary h-full-width">+ 자세히보기</a>
-                </p>
-            </div> <!-- end events-list__item -->
-
-            <div class="column events-list__item">
-                <h3 class="display-1 events-list__item-title">
-                    <a href="#0" title="">위대한 미술품</a>
-                </h3>
-                <ul class="events-list__meta">
-                    <li class="">Total : <div class="island_total"></div></li>
-                    <li class="">Collect : <div class="island_collect"></div></li>
-                </ul>
-                <p class="island_zone">
-                    <?php
-                       /* echo $island_preview;
-                        echo "...";*/
-                    ?>
-                    <a href="javascript:;" class="btn btn--primary h-full-width">+ 자세히보기</a>
-                </p>
-            </div> <!-- end events-list__item -->
-
-            <div class="column events-list__item">
-                <h3 class="display-1 events-list__item-title">
-                    <a href="#0" title="">거인의 심장</a>
-                </h3>
-                <ul class="events-list__meta">
-                    <li class="">Total : <div class="island_total"></div></li>
-                    <li class="">Collect : <div class="island_collect"></div></li>
-                </ul>
-                <p class="island_zone">
-                    <?php
-                       /* echo $island_preview;
-                        echo "...";*/
-                    ?>
-                    <a href="javascript:;" class="btn btn--primary h-full-width">+ 자세히보기</a>
-                </p>
-            </div> <!-- end events-list__item -->
-
-            <div class="column events-list__item">
-                <h3 class="display-1 events-list__item-title">
-                    <a href="#0" title="">항해 모험물</a>
-                </h3>
-                <ul class="events-list__meta">
-                    <li class="">Total : <div class="island_total"></div></li>
-                    <li class="">Collect : <div class="island_collect"></div></li>
-                </ul>
-                <p class="island_zone">
-                    <?php
-                       /* echo $island_preview;
-                        echo "...";*/
-                    ?>
-                    <a href="javascript:;" class="btn btn--primary h-full-width">+ 자세히보기</a>
-                </p>
-            </div> <!-- end events-list__item -->
+        
         </div> <!-- end events-list -->
     </section> <!-- end s-events -->
 
@@ -569,11 +475,13 @@
             $(".block-large-1-2").hide();
             $("#island_div").show();
             $(".collect_menu li").click( function(){
-                $(".block-large-1-2").hide();
-                var div_class = $(this).attr("class");
-                $("#"+div_class).show();
-                $(".collect_menu li").removeClass("on");
-                $(this).addClass("on");
+                if(!$(this).hasClass("on")) {
+                    $(".block-large-1-2").hide();
+                    var div_class = $(this).attr("class");
+                    $("#"+div_class).show();
+                    $(".collect_menu li").removeClass("on");
+                    $(this).addClass("on");
+                }
             })
         })
         $(".engrave_div").click( function(){
