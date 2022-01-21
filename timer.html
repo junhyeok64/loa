@@ -3,8 +3,11 @@
 	//meteor
 	var SetTime = [];
 	var start = [];
-	var total_time = 1200; //20분
-	SetTime[0] = SetTime[1] = SetTime[3] = SetTime[5] = SetTime[6] = SetTime[7] = SetTime[9] = SetTime[11] = SetTime[12] = 10;
+	//var total_time_origin = 1200; //20분
+	var total_time_origin = 1200;
+	var total_time = total_time_origin;
+	var set_time_origin = 100;
+	SetTime[0] = SetTime[1] = SetTime[3] = SetTime[5] = SetTime[6] = SetTime[7] = SetTime[9] = SetTime[11] = SetTime[12] = set_time_origin;
 	start[1] = start[3] = start[5] = start[7] = start[9] = start[11] = start[12] = start[6] = start[0] = 0;
 
 	var audio = new Audio('./sound/sound.mp3');
@@ -15,10 +18,16 @@
 		var msg = SetTime[num] + "초";
 		$("."+name).html(msg);
 
+		if(SetTime[num] == set_time_origin) {
+			//total_time - set_time_origin
+			var show = min_time(set_time_origin);
+			$(".place_hour_"+num).html(show);
+		}
+
         SetTime[num]--;
 
         if (SetTime[num] < 0) {
-            SetTime[num] = 10;
+            SetTime[num] = set_time_origin;
             $(".div_"+num).css("background-color","gray");
             //audio.play();
             clearInterval(start[num]);
@@ -57,16 +66,24 @@
 			break;
 		}
 	}
+	var bt = 0;
 	function boss_start() {
-		setInterval(function() { boss_time(); }, 1000);
+		if(bt == 0) {
+			bt = setInterval(function() { boss_time(0); }, 1000);
+		}
 	}
 	function boss_time() {
 		var name = "title_time";
+		var hour; var minute; var second;
 
 		var msg = total_time;
-		//$("."+name).html(msg);
 		if(total_time / 60 > 59) {
 			var hour = Math.floor(total_time/60/60);
+			if(hour == 0) {
+				hour = "00";
+			} else if (hour < 10) {
+				hour = "0"+hour;
+			}
 		} else {
 			var hour = "00";
 		}
@@ -75,14 +92,23 @@
 			var second = (total_time%60);
 			if(second == 0) {
 				second = "00";
+			} else if (second < 10) {
+				second = "0"+second;
 			}
-			//alert(total_time+"||"+second);
+			if(minute == 0) {
+				minute = "00";
+			} else if (minute < 10) {
+				minute = "0"+minute;
+			}
 		} else {
 			var minute = "00";
 			var second = total_time;
+			if(second == 0) {
+				second = "00";
+			} else if (second < 10) {
+				second = "0"+second;
+			}
 		}
-
-		var hour; var minute; var second;
 
 		var show_time = hour+":"+minute+":"+second;
 		$("."+name).html(show_time);
@@ -90,9 +116,58 @@
         total_time--;
 
         if (total_time < 0) {
-            total_time = 1200;
+            total_time = total_time_origin;
+            clearInterval(bt);
+            bt = 0;
             return false;
         }  
+	}
+	function min_time(min) {
+		var name = "title_time";
+		var hour; var minute; var second;
+
+		if(min > 0) {
+			min_total_time = total_time - min;
+		}
+		console.log(min_total_time);
+		var msg = min_total_time;
+		if(min_total_time / 60 > 59) {
+			var hour = Math.floor(min_total_time/60/60);
+			if(hour == 0) {
+				hour = "00";
+			} else if (hour < 10) {
+				hour = "0"+hour;
+			}
+		} else {
+			var hour = "00";
+		}
+		if(min_total_time / 60 > 0) {
+			var minute = Math.floor(min_total_time/60);
+			var second = (min_total_time%60);
+			if(second == 0) {
+				second = "00";
+			} else if (second < 10) {
+				second = "0"+second;
+			}
+			if(minute == 0) {
+				minute = "00";
+			} else if (minute < 10) {
+				minute = "0"+minute;
+			}
+		} else {
+			var minute = "00";
+			var second = min_total_time;
+			if(second == 0) {
+				second = "00";
+			} else if (second < 10) {
+				second = "0"+second;
+			}
+		}
+
+		var show_time = hour+":"+minute+":"+second;
+		min_total_time = total_time_origin;
+		return show_time;
+
 	}
 </script>
 <style type="text/css">
@@ -152,23 +227,25 @@
 	<div class="parent_div">
 		<div class="place div_12">
 			<!--<p>12</p>-->
-			<div style="margin:5px 0 0 -65px">
+			<!--<div style="margin:5px 0 0 -65px">-->
+			<div style="margin:-5px 0 0 -85px">
 				<input type="button" value="노메" onclick="meteor_yellow('top');">
 			</div>
-			<div class="place_12" style="margin:8px 0 0 -5px;">00:00:00</div>
+			<p class="place_hour_12" style="margin: 0px 0 0 -50px;">12</p>
+			<div class="place_12" style="margin:-2px 0 0 -8px;">00:00:00</div>
 			<div style="margin:5px 0 0 45px">
 				<input type="button" value="click" onclick="meteor(12)" />
 			</div>
 		</div>
 		<div class="place div_1" style="margin:86px 0 0 -36px;">
-			<p>1</p>
+			<p class="place_hour_1">1</p>
 			<div class="place_1" style="margin:-15px 0 0 -5px;">00:00:00</div>
 			<div style="margin:5px 0 0 45px">
 				<input type="button" value="click" onclick="meteor(1)" />
 			</div>
 		</div>
 		<div class="place div_3" style="margin:172px 0 0 -36px;">
-			<p>3</p>
+			<p class="place_hour_3">3</p>
 			<div class="place_3" style="margin:-15px 0 0 -5px;">00:00:00</div>
 			<div style="margin:5px 0 0 45px">
 				<input type="button" value="click" onclick="meteor(3)" />
@@ -177,21 +254,21 @@
 	</div>
 	<div class="parent_div">	
 		<div class="place div_11" style="margin:86px 0 0 -380px;">
-			<p>11</p>
+			<p class="place_hour_11">11</p>
 			<div class="place_11" style="margin:-15px 0 0 -5px;">00:00:00</div>
 			<div style="margin:5px 0 0 45px">
 				<input type="button" class="meteor_div11" value="click" onclick="meteor(11)" />
 			</div>
 		</div>
 		<div class="place div_0" style="margin:172px 0 0 -294px;">
-			<p>0</p>
+			<p class="place_hour_0">0</p>
 			<div class="place_0" style="margin:-15px 0 0 -5px;">00:00:00</div>
 			<div style="margin:5px 0 0 45px">
 				<input type="button" class="meteor_div0" value="click" onclick="meteor(0)" />
 			</div>
 		</div>
 		<div class="place div_5" style="margin:258px 0 0 -208px;">
-			<p>5</p>
+			<p class="place_hour_5">5</p>
 			<div class="place_5" style="margin:-15px 0 0 -5px;">00:00:00</div>
 			<div style="margin:5px 0 0 45px">
 				<input type="button" class="meteor_div5" value="click" onclick="meteor(5)" />
@@ -200,21 +277,21 @@
 	</div>
 	<div class="parent_div">	
 		<div class="place div_9" style="margin:172px 0 0 -466px;">
-			<p>9</p>
+			<p class="place_hour_9">9</p>
 			<div class="place_9" style="margin:-15px 0 0 -5px;">00:00:00</div>
 			<div style="margin:5px 0 0 45px">
 				<input type="button" value="click" onclick="meteor(9)" />
 			</div>
 		</div>
 		<div class="place div_7" style="margin:258px 0 0 -380px;">
-			<p>7</p>
+			<p class="place_hour_7">7</p>
 			<div class="place_7" style="margin:-15px 0 0 -5px;">00:00:00</div>
 			<div style="margin:5px 0 0 45px">
 				<input type="button" value="click" onclick="meteor(7)" />
 			</div>
 		</div>
 		<div class="place div_6" style="margin:344px 0 0 -294px;">
-			<p>6</p>
+			<p class="place_hour_6">6</p>
 			<div class="place_6" style="margin:-15px 0 0 -5px;">00:00:00</div>
 			<div style="margin:5px 0 0 45px">
 				<input type="button" value="click" onclick="meteor(6)" />
