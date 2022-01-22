@@ -129,7 +129,6 @@
 		if(min > 0) {
 			min_total_time = total_time - min;
 		}
-		console.log(min_total_time);
 		var msg = min_total_time;
 		if(min_total_time / 60 > 59) {
 			var hour = Math.floor(min_total_time/60/60);
@@ -220,7 +219,11 @@
 <div class="title">
 	<div>광폭화까지</div>
 	<div class="title_time">00:20:00</div>
-	<div><input type="button" onclick="boss_start();" value="시작"/></div>
+	<div>
+		<input type="button" onclick="boss_start();" value="시작"/>
+		<input type="button" onclick="meteor_yellow('top');" value="12시 노메"/>
+		<input type="button" onclick="meteor_yellow('bottom');" value="6시 노메"/>
+	</div>
 </div>
 <center>
 <div style="margin-left:300px;margin-top:50px;">	
