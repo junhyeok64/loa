@@ -177,6 +177,7 @@
 		-ms-transform: rotate(45deg); /* IE 9 */
 	    -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
 	    transform: rotate(45deg);
+	    cursor:pointer;
 	}
 	.place p {
 		-ms-transform: rotate(315deg); /* IE 9 */
@@ -191,9 +192,9 @@
 	    transform: rotate(315deg);	
 	    margin-left:-50px;
 	}
-	.place input {
+	/*.place input {
 		cursor:pointer;
-	}
+	}*/
 	.parent_div {
 		/*z-index: -999;*/
 	}
@@ -228,78 +229,55 @@
 <center>
 <div style="margin-left:300px;margin-top:50px;">	
 	<div class="parent_div">
-		<div class="place div_12">
-			<!--<p>12</p>-->
-			<!--<div style="margin:5px 0 0 -65px">
-			<div style="margin:-5px 0 0 -85px">-->
-				<!--<input type="button" value="노메" onclick="meteor_yellow('top');">
-			</div>-->
-			<p class="place_hour_12" style="">12</p>
+		<div class="place div_12" onclick="meteor(12)">
+			<p class="" style="">12</p>
 			<!--<p class="place_hour_12" style="margin: 0px 0 0 -50px;">12</p>-->
-			<div class="place_12" style="margin:-16px 0 0 -8px;">00:00:00</div>
-			<div style="margin:5px 0 0 45px">
-				<input type="button" value="click" onclick="meteor(12)" />
-			</div>
+			<div class="place_hour_12" style="margin:-16px 0 0 -8px;">00:00:00</div>
+			<p class="place_12" style="margin:0px 0 0 29px"></p>
 		</div>
-		<div class="place div_1" style="margin:86px 0 0 -36px;">
-			<p class="place_hour_1">1</p>
-			<div class="place_1" style="margin:-15px 0 0 -5px;">00:00:00</div>
-			<div style="margin:5px 0 0 45px">
-				<input type="button" value="click" onclick="meteor(1)" />
-			</div>
+		<div class="place div_1" style="margin:86px 0 0 -36px;" onclick="meteor(1)">
+			<p class="">1</p>
+			<div class="place_hour_1" style="margin:-15px 0 0 -5px;">00:00:00</div>
+			<p class="place_1" style="margin:5px 0 0 45px"></p>
 		</div>
-		<div class="place div_3" style="margin:172px 0 0 -36px;">
-			<p class="place_hour_3">3</p>
-			<div class="place_3" style="margin:-15px 0 0 -5px;">00:00:00</div>
-			<div style="margin:5px 0 0 45px">
-				<input type="button" value="click" onclick="meteor(3)" />
-			</div>
+		<div class="place div_3" style="margin:172px 0 0 -36px;" onclick="meteor(3)">
+			<p class="">3</p>
+			<div class="place_hour_3" style="margin:-15px 0 0 -5px;">00:00:00</div>
+			<p class="place_3" style="margin:5px 0 0 45px"></p>
 		</div>
 	</div>
 	<div class="parent_div">	
-		<div class="place div_11" style="margin:86px 0 0 -380px;">
-			<p class="place_hour_11">11</p>
-			<div class="place_11" style="margin:-15px 0 0 -5px;">00:00:00</div>
-			<div style="margin:5px 0 0 45px">
-				<input type="button" class="meteor_div11" value="click" onclick="meteor(11)" />
-			</div>
+		<div class="place div_11" style="margin:86px 0 0 -380px;" onclick="meteor(11)">
+			<p class="">11</p>
+			<div class="place_hour_11" style="margin:-15px 0 0 -5px;">00:00:00</div>
+			<p class="place_11" style="margin:5px 0 0 45px"></p>
 		</div>
-		<div class="place div_0" style="margin:172px 0 0 -294px;">
-			<p class="place_hour_0">0</p>
-			<div class="place_0" style="margin:-15px 0 0 -5px;">00:00:00</div>
-			<div style="margin:5px 0 0 45px">
-				<input type="button" class="meteor_div0" value="click" onclick="meteor(0)" />
-			</div>
+		<div class="place div_0" style="margin:172px 0 0 -294px;" onclick="meteor(0)">
+			<p class="">0</p>
+			<div class="place_hour_0" style="margin:-15px 0 0 -5px;">00:00:00</div>
+			<p class="place_0" style="margin:5px 0 0 45px"></p>
 		</div>
-		<div class="place div_5" style="margin:258px 0 0 -208px;">
-			<p class="place_hour_5">5</p>
-			<div class="place_5" style="margin:-15px 0 0 -5px;">00:00:00</div>
-			<div style="margin:5px 0 0 45px">
-				<input type="button" class="meteor_div5" value="click" onclick="meteor(5)" />
-			</div>
+		<div class="place div_5" style="margin:258px 0 0 -208px;" onclick="meteor(5)">
+			<p class="">5</p>
+			<div class="place_hour_5" style="margin:-15px 0 0 -5px;">00:00:00</div>
+			<p class="place_5" style="margin:5px 0 0 45px"></p>
 		</div>
 	</div>
 	<div class="parent_div">	
-		<div class="place div_9" style="margin:172px 0 0 -466px;">
-			<p class="place_hour_9">9</p>
-			<div class="place_9" style="margin:-15px 0 0 -5px;">00:00:00</div>
-			<div style="margin:5px 0 0 45px">
-				<input type="button" value="click" onclick="meteor(9)" />
-			</div>
+		<div class="place div_9" style="margin:172px 0 0 -466px;" onclick="meteor(9)">
+			<p class="">9</p>
+			<div class="place_hour_9" style="margin:-15px 0 0 -5px;">00:00:00</div>
+			<p class="place_9" style="margin:5px 0 0 45px"></p>
 		</div>
-		<div class="place div_7" style="margin:258px 0 0 -380px;">
-			<p class="place_hour_7">7</p>
-			<div class="place_7" style="margin:-15px 0 0 -5px;">00:00:00</div>
-			<div style="margin:5px 0 0 45px">
-				<input type="button" value="click" onclick="meteor(7)" />
-			</div>
+		<div class="place div_7" style="margin:258px 0 0 -380px;" onclick="meteor(7)">
+			<p class="">7</p>
+			<div class="place_hour_7" style="margin:-15px 0 0 -5px;">00:00:00</div>
+			<p class="place_7" style="margin:5px 0 0 45px"></p>
 		</div>
-		<div class="place div_6" style="margin:344px 0 0 -294px;">
-			<p class="place_hour_6">6</p>
-			<div class="place_6" style="margin:-15px 0 0 -5px;">00:00:00</div>
-			<div style="margin:5px 0 0 45px">
-				<input type="button" value="click" onclick="meteor(6)" />
-			</div>
+		<div class="place div_6" style="margin:344px 0 0 -294px;" onclick="meteor(6)">
+			<p class="">6</p>
+			<div class="place_hour_6" style="margin:-15px 0 0 -5px;">00:00:00</div>
+			<p class="place_6" style="margin:5px 0 0 45px"></p>
 		</div>
 	</div>
 </div>
