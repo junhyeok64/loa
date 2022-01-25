@@ -28,7 +28,9 @@
 
         if (SetTime[num] < 0) {
             SetTime[num] = set_time_origin;
-            $(".div_"+num).css("background-color","gray");
+            //$(".div_"+num).css("background-color","gray");
+            $(".div_"+num).removeClass("yellow");
+            $(".div_"+num).addClass("gray");
             //audio.play();
             clearInterval(start[num]);
             start[num] = 0;
@@ -36,7 +38,8 @@
         }  
 	}
 	function meteor(num) {
-		$(".div_"+num).css("background-color","yellow");
+		$(".div_"+num).addClass("yellow");
+		$(".place").removeClass("gray");
 		var class_name = "place_"+num;
 		if(start[num] == 0) {
 			start[num] = setInterval(function() { set_time(num); }, 1000);
@@ -213,6 +216,16 @@
 	}
 	.title_time {
 		margin-left:10px;
+	}
+	.gray { 
+	    background-color:gray;
+	    transition-property:background-color;
+	    transition-duration:2.5s;
+	}
+	.yellow { 
+	    background-color:yellow;
+	    transition-property:background-color;
+	    transition-duration:2.5s;
 	}
 	
 </style>
