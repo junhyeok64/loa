@@ -171,6 +171,12 @@
 		return show_time;
 
 	}
+	function show(val) {
+		$(".text_comment").hide();
+		$(".text_"+val).show();
+		$(".list").removeClass("on");
+		$(".list_"+val).addClass("on");
+	}
 </script>
 <style type="text/css">
 	.place {
@@ -227,8 +233,84 @@
 	    transition-property:background-color;
 	    transition-duration:2.5s;
 	}
+	.text {float:right; border:1px solid black;}
+	.list_none {list-style:none;width:30%;}
+	.list_none li {margin:5px 0px; padding:10px 50px; border:1px solid black;cursor:pointer;}
+	.list_none .on {background-color:#F2CB61; }
+	.text_comment {font-size:30px;display:none;min-width:600px;}
+	.bold {font-weight:bold;}
 	
 </style>
+<div class="text">
+	<div class="text_comment text_3">
+		<b>43줄 별</b>
+	</div>
+	<div class="text_comment text_4">
+		170 125 55전멸 / 95줄 무력<br/><br/>
+		<b style="color:#F2CB61">노랑</b><br/>
+		변환시에 똥피하기, 바깥쪽 터짐<br/>
+		능지패턴때 기절구름 추가<br/>
+		전멸기믹<br/>
+		절반구슬깨고 무력화시<br/>
+		보라똥먹으면 매혹걸려서 처리 잘 해줘야댐<br/>
+		<br/>
+
+		<b style="color:#4641D9">파랑</b><br/>
+		변환시 변끝안전, 후에 불장판 몰아깔기<br/>
+		전멸기믹 깐부무력, 무력 후에 # 장판생김<br/>
+		<br/>
+
+		<b style="color:#980000">빨강</b><br/>
+		변환시 모서리안전, 모서리 후 올챙이 먹기<br/>
+		전멸기믹<br/>
+		무력 피라미드, 무력 후 도넛장판 두개나옴<br/>
+		<br/>
+		<b style="color:#F2CB61">별 무력</b><br>
+		변환시 사방팔방 장판깔림<br/>
+		무력시 피격되면 무력감소디벞걸림(성부성폭<br/>
+		무력 후 체력흡수공격함<br/>
+	</div>
+	<div class="text_comment text_5">
+		<b>
+			1문양<br/>
+			146줄<br/>
+			ㄴ143<br/><br/>
+		</b>
+
+		<b>
+			2문양<br/>
+			56줄<br/>
+			ㄴ53<br/><br/>
+		</b>
+	</div>
+	<div class="text_comment text_6">
+		140줄 노란메테오<br/><br/>
+
+		113줄 찬미<br/><br/>
+
+		80줄 노메<br/><br/>
+
+		40줄 노메<br/><br/>
+	</div>
+</div>
+<ul class="list_none">
+	<li class="list list_3" onclick="show('3');">
+		<span>3넴</span>
+	</li>
+	<li class="list list_4" onclick="show('4');">
+		<span>4넴</span>
+	</li>
+	<li class="list list_5" onclick="show('5');">
+		<span>5넴</span>
+	</li>
+	<li class="list list_6" onclick="show('6');">
+		<span>6넴</span>
+	</li>
+
+</ul>
+<div>
+	
+</div>
 
 <div class="title">
 	<div>광폭화까지</div>
@@ -239,59 +321,62 @@
 		<input type="button" onclick="meteor_yellow('bottom');" value="6시 노메"/>
 	</div>
 </div>
-<center>
-<div style="margin-left:300px;margin-top:50px;">	
-	<div class="parent_div">
-		<div class="place div_12" onclick="meteor(12)">
-			<p class="" style="">12</p>
-			<!--<p class="place_hour_12" style="margin: 0px 0 0 -50px;">12</p>-->
-			<div class="place_hour_12" style="margin:-16px 0 0 -8px;">00:00:00</div>
-			<p class="place_12" style="margin:0px 0 0 29px"></p>
+
+<div>
+	<center>
+		<div style="margin-left:300px;margin-top:50px;">	
+			<div class="parent_div">
+				<div class="place div_12" onclick="meteor(12)">
+					<p class="" style="">12</p>
+					<!--<p class="place_hour_12" style="margin: 0px 0 0 -50px;">12</p>-->
+					<div class="place_hour_12" style="margin:-16px 0 0 -8px;">00:00:00</div>
+					<p class="place_12" style="margin:0px 0 0 29px"></p>
+				</div>
+				<div class="place div_1" style="margin:86px 0 0 -36px;" onclick="meteor(1)">
+					<p class="">1</p>
+					<div class="place_hour_1" style="margin:-15px 0 0 -5px;">00:00:00</div>
+					<p class="place_1" style="margin:5px 0 0 45px"></p>
+				</div>
+				<div class="place div_3" style="margin:172px 0 0 -36px;" onclick="meteor(3)">
+					<p class="">3</p>
+					<div class="place_hour_3" style="margin:-15px 0 0 -5px;">00:00:00</div>
+					<p class="place_3" style="margin:5px 0 0 45px"></p>
+				</div>
+			</div>
+			<div class="parent_div">	
+				<div class="place div_11" style="margin:86px 0 0 -380px;" onclick="meteor(11)">
+					<p class="">11</p>
+					<div class="place_hour_11" style="margin:-15px 0 0 -5px;">00:00:00</div>
+					<p class="place_11" style="margin:5px 0 0 45px"></p>
+				</div>
+				<div class="place div_0" style="margin:172px 0 0 -294px;" onclick="meteor(0)">
+					<p class="">0</p>
+					<div class="place_hour_0" style="margin:-15px 0 0 -5px;">00:00:00</div>
+					<p class="place_0" style="margin:5px 0 0 45px"></p>
+				</div>
+				<div class="place div_5" style="margin:258px 0 0 -208px;" onclick="meteor(5)">
+					<p class="">5</p>
+					<div class="place_hour_5" style="margin:-15px 0 0 -5px;">00:00:00</div>
+					<p class="place_5" style="margin:5px 0 0 45px"></p>
+				</div>
+			</div>
+			<div class="parent_div">	
+				<div class="place div_9" style="margin:172px 0 0 -466px;" onclick="meteor(9)">
+					<p class="">9</p>
+					<div class="place_hour_9" style="margin:-15px 0 0 -5px;">00:00:00</div>
+					<p class="place_9" style="margin:5px 0 0 45px"></p>
+				</div>
+				<div class="place div_7" style="margin:258px 0 0 -380px;" onclick="meteor(7)">
+					<p class="">7</p>
+					<div class="place_hour_7" style="margin:-15px 0 0 -5px;">00:00:00</div>
+					<p class="place_7" style="margin:5px 0 0 45px"></p>
+				</div>
+				<div class="place div_6" style="margin:344px 0 0 -294px;" onclick="meteor(6)">
+					<p class="">6</p>
+					<div class="place_hour_6" style="margin:-15px 0 0 -5px;">00:00:00</div>
+					<p class="place_6" style="margin:5px 0 0 45px"></p>
+				</div>
+			</div>
 		</div>
-		<div class="place div_1" style="margin:86px 0 0 -36px;" onclick="meteor(1)">
-			<p class="">1</p>
-			<div class="place_hour_1" style="margin:-15px 0 0 -5px;">00:00:00</div>
-			<p class="place_1" style="margin:5px 0 0 45px"></p>
-		</div>
-		<div class="place div_3" style="margin:172px 0 0 -36px;" onclick="meteor(3)">
-			<p class="">3</p>
-			<div class="place_hour_3" style="margin:-15px 0 0 -5px;">00:00:00</div>
-			<p class="place_3" style="margin:5px 0 0 45px"></p>
-		</div>
-	</div>
-	<div class="parent_div">	
-		<div class="place div_11" style="margin:86px 0 0 -380px;" onclick="meteor(11)">
-			<p class="">11</p>
-			<div class="place_hour_11" style="margin:-15px 0 0 -5px;">00:00:00</div>
-			<p class="place_11" style="margin:5px 0 0 45px"></p>
-		</div>
-		<div class="place div_0" style="margin:172px 0 0 -294px;" onclick="meteor(0)">
-			<p class="">0</p>
-			<div class="place_hour_0" style="margin:-15px 0 0 -5px;">00:00:00</div>
-			<p class="place_0" style="margin:5px 0 0 45px"></p>
-		</div>
-		<div class="place div_5" style="margin:258px 0 0 -208px;" onclick="meteor(5)">
-			<p class="">5</p>
-			<div class="place_hour_5" style="margin:-15px 0 0 -5px;">00:00:00</div>
-			<p class="place_5" style="margin:5px 0 0 45px"></p>
-		</div>
-	</div>
-	<div class="parent_div">	
-		<div class="place div_9" style="margin:172px 0 0 -466px;" onclick="meteor(9)">
-			<p class="">9</p>
-			<div class="place_hour_9" style="margin:-15px 0 0 -5px;">00:00:00</div>
-			<p class="place_9" style="margin:5px 0 0 45px"></p>
-		</div>
-		<div class="place div_7" style="margin:258px 0 0 -380px;" onclick="meteor(7)">
-			<p class="">7</p>
-			<div class="place_hour_7" style="margin:-15px 0 0 -5px;">00:00:00</div>
-			<p class="place_7" style="margin:5px 0 0 45px"></p>
-		</div>
-		<div class="place div_6" style="margin:344px 0 0 -294px;" onclick="meteor(6)">
-			<p class="">6</p>
-			<div class="place_hour_6" style="margin:-15px 0 0 -5px;">00:00:00</div>
-			<p class="place_6" style="margin:5px 0 0 45px"></p>
-		</div>
-	</div>
+	</center>
 </div>
-</center>
