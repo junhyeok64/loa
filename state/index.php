@@ -14,12 +14,14 @@
 			curl_setopt ($ch, CURLOPT_SSL_VERIFYPEER, false);
 			curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
 			curl_setopt ($ch, CURLOPT_BINARYTRANSFER, 1);
+			curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER["HTTP_USER_AGENT"]);
 			curl_setopt ($ch, CURLOPT_REFERER, "");
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $data);       //POST data
 			curl_setopt($ch, CURLOPT_POST, false);
 
 			$result = curl_exec($ch);
 			curl_close ($ch);
+			//echo $result;
 
 			$patten = "/<img class=\"profile-character-info__img\" src=\"(.*?)\"/is";
 			preg_match_all($patten,$result,$job); 

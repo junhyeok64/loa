@@ -1,10 +1,18 @@
 <?php
+	//header('Pragma: no-cache');
+	header("private");
+	//header('Cache-Control: max-age = 0, no-cache');
 	$nickname = "이준혁씨";
-	$url = "https://lostark.game.onstove.com/Profile/Character/".urlencode($nickname);
+	$url = "https://lostark.game.onstove.com:443/Profile/Character/".urlencode($nickname);
 	$data = array();
 	$ch = curl_init();
+	
+
 	curl_setopt ($ch, CURLOPT_URL,$url);
 	curl_setopt ($ch, CURLOPT_SSL_VERIFYPEER, false);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0); 
+	curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER["HTTP_USER_AGENT"]);
+
 	curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
 	curl_setopt ($ch, CURLOPT_BINARYTRANSFER, 1);
 	curl_setopt ($ch, CURLOPT_REFERER, "");
@@ -12,9 +20,11 @@
 	curl_setopt($ch, CURLOPT_POST, false);
 
 	$result = curl_exec($ch);
+	/*$result = str_replace("\"/Content/", "\"https://lostark.game.onstove.com/Content/", $result);
+	$result = str_replace("https://lostark.game.onstove.com/Content/Common.PC.js", "/Content/Common.PC.js", $result);*/
 	curl_close ($ch);
 
-	//echo $result;exit;
+	echo $result;exit;
 
 	//$patten = "/<th style=\"width:305px; color:#010101; text-align:left; text-indent:20px;\">(.*?)<\/th>/is";
 	$patten = "/var _memberNo = \'(.*?)\'/is";
