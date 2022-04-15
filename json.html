@@ -1,0 +1,161 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+	function hodadac(num) {
+		for(var i=1; i<7; i++) {
+			var val = $("input[name='name_"+num+"']").val()+"_"+$("input[name='class"+num+"_"+i+"']").val();
+			if($("input[name='class"+num+"_"+i+"']").val() != "") {
+				$("input[name='class"+num+"_"+i+"']").val(val);
+			}
+		}
+	}
+	function reset(num) {
+		for(var i=1; i<7; i++) {
+			$("input[name='class"+num+"_"+i+"']").val("");
+		}
+	}
+	function decode() {
+		var arr = [];
+		var re = "";
+		var user = [];
+
+		for(var i=1; i<=8; i++) {
+			if($("input[name='name_"+i+"']").val().length > 0) {
+				user[i-1] = $("input[name='name_"+i+"']").val();
+
+				arr[i-1] = [];
+				for(var j=0; j<6; j++) {
+					var ch = j+1;
+					if($("input[name='class"+i+"_"+ch+"']").val().length > 0 ){
+						arr[i-1][j] = $("input[name='class"+i+"_"+ch+"']").val();
+					}
+					if(j==5) {
+						if(re == "") {
+							re = re+'"'+Number(i-1)+'":'+JSON.stringify(arr[i-1]);
+						} else {
+							re = re+',"'+Number(i-1)+'":'+JSON.stringify(arr[i-1]);
+						}
+					}
+				}
+				//arr[i-1] = $("input[name='name_"+i+"']").val();
+			}
+		}
+		var show_user = "";
+		alert(user.length);
+		if(user.length > 0 ) {
+			show_user = '"user":'+JSON.stringify(user);
+			re = show_user+","+re;
+		}
+		$("textarea[name='show']").val("{"+re+"}");
+	}
+</script>
+<style type="text/css">
+	table {width:15rem;}
+	.top {padding-top:20px;}
+</style>
+<div>
+	<table>
+		<tr>
+			<td >
+				<input type="text" name="name_1" placeholder="username">
+				<input type="button" value="호다닥쓰기" onclick="hodadac('1')"/>
+				<input type="button" value="reset" onclick="reset('1')"/>
+
+				<input type="text" name="class1_1" placeholder="user1_class">
+				<input type="text" name="class1_2" placeholder="user1_class">
+				<input type="text" name="class1_3" placeholder="user1_class">
+				<input type="text" name="class1_4" placeholder="user1_class">
+				<input type="text" name="class1_5" placeholder="user1_class">
+				<input type="text" name="class1_6" placeholder="user1_class">
+			</td>
+			<td>
+				<input type="text" name="name_2" placeholder="username">
+				<input type="button" value="호다닥쓰기" onclick="hodadac('2')"/>
+
+				<input type="text" name="class2_1" placeholder="user2_class">
+				<input type="text" name="class2_2" placeholder="user2_class">
+				<input type="text" name="class2_3" placeholder="user2_class">
+				<input type="text" name="class2_4" placeholder="user2_class">
+				<input type="text" name="class2_5" placeholder="user2_class">
+				<input type="text" name="class2_6" placeholder="user2_class">
+			</td>
+		</tr>
+		<tr>
+			<td class="top">
+				<input type="text" name="name_3" placeholder="username">
+				<input type="button" value="호다닥쓰기" onclick="hodadac('3')"/>
+
+				<input type="text" name="class3_1" placeholder="user3_class">
+				<input type="text" name="class3_2" placeholder="user3_class">
+				<input type="text" name="class3_3" placeholder="user3_class">
+				<input type="text" name="class3_4" placeholder="user3_class">
+				<input type="text" name="class3_5" placeholder="user3_class">
+				<input type="text" name="class3_6" placeholder="user3_class">
+			</td>
+			<td class="top">
+				<input type="text" name="name_4" placeholder="username">
+				<input type="button" value="호다닥쓰기" onclick="hodadac('4')"/>
+
+				<input type="text" name="class4_1" placeholder="user4_class">
+				<input type="text" name="class4_2" placeholder="user4_class">
+				<input type="text" name="class4_3" placeholder="user4_class">
+				<input type="text" name="class4_4" placeholder="user4_class">
+				<input type="text" name="class4_5" placeholder="user4_class">
+				<input type="text" name="class4_6" placeholder="user4_class">
+			</td>
+		</tr>
+		<tr>
+			<td class="top">
+				<input type="text" name="name_5" placeholder="username">
+				<input type="button" value="호다닥쓰기" onclick="hodadac('5')"/>
+
+				<input type="text" name="class5_1" placeholder="user5_class">
+				<input type="text" name="class5_2" placeholder="user5_class">
+				<input type="text" name="class5_3" placeholder="user5_class">
+				<input type="text" name="class5_4" placeholder="user5_class">
+				<input type="text" name="class5_5" placeholder="user5_class">
+				<input type="text" name="class5_6" placeholder="user5_class">
+			</td>
+			<td class="top">
+				<input type="text" name="name_6" placeholder="username">
+				<input type="button" value="호다닥쓰기" onclick="hodadac('6')"/>
+
+				<input type="text" name="class6_1" placeholder="user6_class">
+				<input type="text" name="class6_2" placeholder="user6_class">
+				<input type="text" name="class6_3" placeholder="user6_class">
+				<input type="text" name="class6_4" placeholder="user6_class">
+				<input type="text" name="class6_5" placeholder="user6_class">
+				<input type="text" name="class6_6" placeholder="user6_class">
+			</td>
+		</tr>
+		<tr>
+			<td class="top">
+				<input type="text" name="name_7" placeholder="username">
+				<input type="button" value="호다닥쓰기" onclick="hodadac('7')"/>
+
+				<input type="text" name="class7_1" placeholder="user7_class">
+				<input type="text" name="class7_2" placeholder="user7_class">
+				<input type="text" name="class7_3" placeholder="user7_class">
+				<input type="text" name="class7_4" placeholder="user7_class">
+				<input type="text" name="class7_5" placeholder="user7_class">
+				<input type="text" name="class7_6" placeholder="user7_class">
+			</td>
+			<td class="top">
+				<input type="text" name="name_8" placeholder="username">
+				<input type="button" value="호다닥쓰기" onclick="hodadac('8')"/>
+
+				<input type="text" name="class8_1" placeholder="user8_class">
+				<input type="text" name="class8_2" placeholder="user8_class">
+				<input type="text" name="class8_3" placeholder="user8_class">
+				<input type="text" name="class8_4" placeholder="user8_class">
+				<input type="text" name="class8_5" placeholder="user8_class">
+				<input type="text" name="class8_6" placeholder="user8_class">
+			</td>
+		</tr>
+
+	</table>
+	<div style="margin-top:10px;"></div>
+	<input type="button" value="decode" style="width:100px;" onclick="decode();">
+
+	<textarea name="show"></textarea>
+	
+</div>

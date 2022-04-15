@@ -1,0 +1,102 @@
+<style type="text/css">
+   .body_div {/*border: 1px solid black; height:30rem*/}
+   .drag_sub {padding:15 10px; width:100px; cursor:move}
+   .drag_sub_0 {border: 1px solid black; background-color:red;}
+   .drag_sub_1 {border: 1px solid black; background-color:#FFBB00;}
+   .drag_sub_2 {border: 1px solid black; background-color:#47C83E;}
+   .drag_sub_3 {border: 1px solid black; background-color:#4374D9;}
+   .drag_sub_4 {border: 1px solid black; background-color:#6B66FF;}
+   .drag_sub_5 {border: 1px solid black; background-color:#D9418C;}
+   .drag_sub_6 {border: 1px solid black; background-color:#747474;}
+   .drag_sub_7 {border: 1px solid black; background-color:#997000;}
+   .drag_sub_8 {border: 1px solid black; background-color:white;}
+   .party {border: 1px solid black;float: left; padding:5rem 12rem;}
+   .party:first-child {clear:both;}
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script type="text/javascript">
+   //var arr = ["1", "2"];
+   //var person = JSON.stringify(data);
+
+
+   /*
+   		json_data:
+   		
+   		user
+   		info_x
+
+         ※조건※
+
+         두당 최대 6개
+         8명까지 참여
+         party div 고정할건지 반응형 할건지도 생각(2~3개씩 밑으로 떨구는개 나을거같음)
+
+         페이지 하나 더 만들어서 겟으로 json 해서 보내주는 페이지 만들어주면될듯?
+         위 조건 두당몇개 입력란 작업해서 천재다;
+
+   */
+   $(document).ready(function(){
+      $(".drag_sub").draggable();
+      
+      var val = getParameter("val");
+      if(val.length > 0) {
+      	const arr = JSON.parse(val);
+
+      	for(var c=0; c<arr.user.length; c++) {
+      		new_div(arr[c], c);	
+      	}
+      	$(".user_div").html(html);
+      	$(".drag_sub").draggable();
+      }
+   })
+   function div_check() {
+      $(".party").mouseover(function(){
+         //여기서 중복유저 채킹
+      })
+   }
+
+   function getParameter(name) {
+	    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+	    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+	        results = regex.exec(location.search);
+	    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+	}
+   /*
+   drag_sub 별 각 유저별 클래스 부여
+   큰 틀잡고 파티별 틀 잡아서 그 파디별 틀엔 유저별 클래스 length 한개 이상일경우 못넣게 작업 : 이건 추후 생각 / 필수기능이 아님
+
+   유저 데이터 끌어올때, 백단에서 못끌어올거같으니 
+      1. 배열로 받거나
+      2. 갯으로 받거나
+   */
+   var html = [];
+   function new_div(arr, c) {      //받은 배열 갯수만큼 drag_div 생성(유저 수), 단 한명아닌 여러그룹 사용 해야할태니 색구분 필요한데 어캐바를지 생각해보셈
+      if(arr.length > 0) {     
+      	html[c] = "<div style='float:left'>";
+         for(var i=0; i<arr.length; i++){
+            html[c] = html[c]+"<div class='drag_sub drag_sub_"+c+"'>"+arr[i]+"</div>";
+         }
+         html[c] = html[c]+"</div>";
+         
+      }
+   }
+</script>
+
+<div class="body_div">
+   <div class="user_div"></div>
+   <!--<div class="drag_sub"></div>
+   <div class="drag_sub"></div>
+   <div class="drag_sub"></div>-->
+
+   <div style="clear:both;" class="party party_1"></div>
+   <div class="party party_2"></div>
+   <div class="party party_3"></div>
+   <div class="party party_4"></div>
+   <div class="party party_5"></div>
+   <div class="party party_6"></div>
+   <div class="party party_7"></div>
+   <div class="party party_8"></div>
+</div>
