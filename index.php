@@ -1,5 +1,6 @@
 <?php
     include "../config/loa_config.php";
+    //
 ?>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
